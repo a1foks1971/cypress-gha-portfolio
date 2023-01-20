@@ -2,7 +2,7 @@ name: End-to-end tests
 # on: [push]
 on: 
   push:
-    branches: [ master ]
+    branches: [ main ]
   schedule:
     - cron: '15 * * * *'
 jobs:
