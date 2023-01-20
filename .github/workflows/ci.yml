@@ -1,7 +1,8 @@
 name: End-to-end tests
 # on: [push]
 on: 
-  [push]
+  push:
+    branches: [ master ]
   schedule:
     - cron: '15 * * * *'
 jobs:
