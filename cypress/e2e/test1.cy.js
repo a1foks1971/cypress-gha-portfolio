@@ -4,6 +4,6 @@ describe('template spec', () => {
   it('passes', () => {
     LoginPage.login();
     cy.get('#email')
-    cy.url().should('include', '/pb24')
+    cy.url().should('include', 'facebook')
   })
 })
