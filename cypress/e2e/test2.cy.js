@@ -1,6 +1,8 @@
+import LoginPage from "../pageObjects/login/LoginPage";
+
 describe('template spec', () => {
   it('passes', () => {
-    cy.visit('http://www.facebook.com/')
+    LoginPage.login();
     cy.get('#email')
   })
 })

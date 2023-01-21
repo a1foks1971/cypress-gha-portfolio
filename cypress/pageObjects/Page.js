@@ -1,8 +1,9 @@
+import envVar from "../config/envVars";
+
 export class Page {
     constructor() {
-        const db = Cypress.env('db');
-        console.log("db", db);
-        this.env = 'http://www.facebook.com/';
-        // this.env = db['env'] ? db['env'] : 'http://www.facebook.com/';
+        const run_env = Cypress.env('run_env');
+        console.log("run_env", run_env);
+        this.env = run_env ? run_env : envVar.defEnv();
     }
 }

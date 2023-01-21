@@ -1,2 +1,1 @@
-npm run runtest
-#npm run $@ runtest
+DB_ENV=$1 npm run cy:run $2
