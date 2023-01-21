@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/cypress run",
-    "runtest": "npm run test"
+    "runtest": "npm run test",
+    "cy:run": "runtest --env db.env=$DB_ENV",
+    "cy:open": "cypress open --env db.env=$DB_ENV"
   },
   "author": "",
   "license": "ISC",
