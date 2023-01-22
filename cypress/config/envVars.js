@@ -2,7 +2,7 @@ class EnvVar {
     constructor() {}
 
     defEnv() {
-        return 'http://www.facebook.com/';
+        return 'https://qa-v6.5thkind.net/';
     }
 }
 export default new EnvVar();

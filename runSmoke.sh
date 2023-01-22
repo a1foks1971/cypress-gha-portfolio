@@ -1,0 +1,1 @@
+DB_ENV=$1 npm run cy:run ./cypress/e2e/smoke/*.cy.js
