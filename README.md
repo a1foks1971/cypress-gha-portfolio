@@ -5,6 +5,6 @@
 
 2. Run by a spec ID
     ./runid.sh --spec=T002
-    T002 is a spec ID from cypress/config/specList.js
+        - where T002 is a spec ID from cypress/config/specList.js
     ./runid.sh --env=qa --spec=T002
-    'qa' is an env ID from cypress/config/envVars.js
+        - where 'qa' is an env ID from cypress/config/envVars.js
