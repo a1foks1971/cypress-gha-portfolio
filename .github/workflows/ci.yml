@@ -15,9 +15,10 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          spec: cypress/e2e/test2.cy.js
+        uses: ./runid.sh --spec=T002 --env=6pm
+        # uses: cypress-io/github-action@v5
+        # with:
+        #   spec: cypress/e2e/test2.cy.jobs #WORKS
       #  with:
       #    start: DB_ENV=https://next.privat24.ua/ npm run runtest
       # after the test run completes
