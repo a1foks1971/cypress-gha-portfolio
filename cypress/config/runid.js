@@ -1,10 +1,11 @@
 const specList = require("./specList.js");
+const envList = require("./envVars.js");
 const {exec} = require("child_process");
 
 
 (function() {
     const splitter = '=';
-    let env = '';
+    let envId = '';
     let specId = '';
     const args = process.argv;
     console.log('args', args);
@@ -13,7 +14,7 @@ const {exec} = require("child_process");
             const argArr = arg.split(splitter);
             switch (argArr[0].toLowerCase()) {
                 case "--env":
-                    env = argArr[1];
+                    envId = argArr[1];
                     break;
                 case "--spec":
                     specId = argArr[1];
@@ -21,7 +22,9 @@ const {exec} = require("child_process");
             }
         }
     });
-    const commandString = `DB_ENV='${env}' npm run cy:run '${specList[specId]}'`;
+    if (envId === '') envId = Object.entries(envList)[0][0];
+    if (specId === '') specId = Object.entries(specList)[0][0];
+    const commandString = `DB_ENV='${envList[`${envId}`.toLowerCase()]}' npm run cy:run '${specList[specId]}'`;
     console.log('commandString', commandString);
     exec(commandString);
 })();

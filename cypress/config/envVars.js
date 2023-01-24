@@ -1,8 +1,25 @@
-class EnvVar {
-    constructor() {}
+module.exports = {
+    "6pm": 'https://www.6pm.com/',
+    "qa": 'https://qa-v6.5thkind.net/',
+};
 
-    defEnv() {
-        return 'https://qa-v6.5thkind.net/';
-    }
-}
-export default new EnvVar();
+// class EnvVar {
+    
+//     constructor() {
+//         this.envs = {
+//             "qa": 'https://qa-v6.5thkind.net/',
+//             "6pm": 'https://www.6pm.com/',
+//         }
+//     }
+
+//     defEnv() {
+//         return envs['qa'];
+//     }
+
+//     getEnv(_envId) {
+//         let envId = `${_envId}`.toLowerCase();
+//         return this.envs[envId];
+//     }
+
+// }
+// export default new EnvVar();
