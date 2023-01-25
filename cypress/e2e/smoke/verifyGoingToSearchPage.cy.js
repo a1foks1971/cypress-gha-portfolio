@@ -14,14 +14,14 @@ describe('Verify opening a product page', () => {
   })
 
   it(`Verifies an item of the menu`, function() {
-    return verifyProduct(0);
+    verifyfixtureProduct(0);
   })
 
   it(`Verifies another item of the menu`, function() {
-    return verifyProduct(1);
+    verifyfixtureProduct(1);
   })
 
-  function verifyProduct(index){
+  function verifyfixtureProduct(index){
     MenuPage.checkAllLinksOfMenuByName({menuName: products[index].menuName});
     MenuPage.selectMenu({
       menuName: products[index]["menuName"],
@@ -34,16 +34,6 @@ describe('Verify opening a product page', () => {
         products[index]["columnName"]
       ]
     })
-
   }
-
-  // it('checks the "Clothing" menu is aapeared after hovering', () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Clothing"});
-  // })
-
-  // it('checks the "Bags" menu is aapeared after hovering', () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Bags"});
-  // })
-
 
 })
