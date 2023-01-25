@@ -1,6 +1,6 @@
 import MenuPage from "../pageObjects/header/menu";
 
-describe('template spec', () => {
+describe('Verify appearing of product menu uner hovering', () => {
   beforeEach(()=>{
     // cy.visit(Cypress.env('run_env'));
     cy.visit('https://www.6pm.com/');
