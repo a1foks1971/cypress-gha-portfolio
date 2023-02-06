@@ -2,7 +2,7 @@ import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
 import {console_log} from "../../util/functions";
 
-const cContainer = '.Nn-z';
+const cContainer = '.searchWrapper';
 const _css = {
     container: cContainer,
     h1: `${cContainer} h1`,

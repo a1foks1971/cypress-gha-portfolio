@@ -1,6 +1,7 @@
 import { Page } from "../Page";
 import { Body } from "./body";
 import { Header } from "./header";
+import { Section } from "./section";
 import * as CONSTS from "../../util/consts";
 import {console_log} from "../../util/functions";
 
@@ -21,6 +22,7 @@ export class Search extends Page {
       this.timeout = 16000;
       this.Body = new Body()
       this.Header = new Header()
+      this.Section = new Section()
   }
 
 

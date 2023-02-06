@@ -9,7 +9,8 @@ const _css = {
     menuLinks: `${cContainer}>ul>li>a`,
     menuContainer: `${cContainer}>ul>li>div`,
     frameColumns: `div>div>div`,
-    columnName: `a.di-z`,
+    columnName: `a[class*="-z"]`,
+    // columnName: `a.xf-z`,
     columnItems: `ul>li>a`  
 }
 

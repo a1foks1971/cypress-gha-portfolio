@@ -1,5 +1,4 @@
-import MenuPage from "../../pageObjects/header/menu";
-import SearchPage from "../../pageObjects/searchWrapper/search";
+import MenuSteps from "../../steps/menuSteps";
 
 describe('Verify opening a product page', () => {
   let products = [];
@@ -14,26 +13,19 @@ describe('Verify opening a product page', () => {
   })
 
   it(`Verifies an item of the menu`, function() {
-    verifyfixtureProduct(0);
+    MenuSteps.verifyfixtureProduct({
+      menuName: products[0]["menuName"],
+      columnName: products[0]["columnName"],
+      itemName: products[0]["productType"],
+    });
   })
 
   it(`Verifies another item of the menu`, function() {
-    verifyfixtureProduct(1);
+    MenuSteps.verifyfixtureProduct({
+      menuName: products[1]["menuName"],
+      columnName: products[1]["columnName"],
+      itemName: products[1]["productType"],
+    });
   })
-
-  function verifyfixtureProduct(index){
-    MenuPage.checkAllLinksOfMenuByName({menuName: products[index].menuName});
-    MenuPage.selectMenu({
-      menuName: products[index]["menuName"],
-      columnName: products[index]["columnName"],
-      itemName: products[index]["productType"],
-    })
-    SearchPage.Header.verifyH1({
-      expContains: [
-        products[index]["menuName"],
-        products[index]["columnName"]
-      ]
-    })
-  }
 
 })
