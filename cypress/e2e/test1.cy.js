@@ -1,3 +1,5 @@
+"use strict";
+
 import LoginPage from "../pageObjects/login/LoginPage";
 
 // describe('template spec', function() {

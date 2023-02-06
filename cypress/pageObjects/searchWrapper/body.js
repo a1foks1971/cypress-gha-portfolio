@@ -1,3 +1,5 @@
+"use strict";
+
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
 import {console_log} from "../../util/functions";

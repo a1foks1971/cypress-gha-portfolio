@@ -1,7 +1,9 @@
+"use strict";
+
 import { Page } from "../Page";
 import { Body } from "./body";
 import { Header } from "./header";
-import { Section } from "./section";
+import { Section } from "./section/section";
 import * as CONSTS from "../../util/consts";
 import {console_log} from "../../util/functions";
 

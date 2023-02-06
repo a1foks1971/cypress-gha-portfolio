@@ -1,3 +1,5 @@
+"use strict";
+
 import envVar from "../config/envVars";
 
 export class Page {

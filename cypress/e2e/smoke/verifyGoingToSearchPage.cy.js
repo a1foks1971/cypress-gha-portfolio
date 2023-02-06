@@ -1,3 +1,5 @@
+"use strict";
+
 import MenuSteps from "../../steps/menuSteps";
 
 describe('Verify opening a product page', () => {
@@ -13,7 +15,7 @@ describe('Verify opening a product page', () => {
   })
 
   it(`Verifies an item of the menu`, function() {
-    MenuSteps.verifyfixtureProduct({
+    MenuSteps.verifyMenu({
       menuName: products[0]["menuName"],
       columnName: products[0]["columnName"],
       itemName: products[0]["productType"],
@@ -21,7 +23,7 @@ describe('Verify opening a product page', () => {
   })
 
   it(`Verifies another item of the menu`, function() {
-    MenuSteps.verifyfixtureProduct({
+    MenuSteps.verifyMenu({
       menuName: products[1]["menuName"],
       columnName: products[1]["columnName"],
       itemName: products[1]["productType"],

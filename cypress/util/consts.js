@@ -13,4 +13,14 @@ export const TITLES = {
     PRICE: "Price",
     COLOR: "Color",
   }
+};
+export const FIXTURE_PROPERTIES = {
+  SECTIONS: {
+    LI: {
+      TYPE: {
+        NAME: "name",
+        INDEX: "index",
+      }
+    }
+  }
 }

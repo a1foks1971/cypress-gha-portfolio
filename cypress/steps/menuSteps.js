@@ -6,7 +6,7 @@ import SearchPage from "../pageObjects/searchWrapper/search";
 
 class MenuSteps extends BaseStep {
 
-  verifyfixtureProduct({
+  verifyMenu({
     menuName,
     columnName,
     itemName

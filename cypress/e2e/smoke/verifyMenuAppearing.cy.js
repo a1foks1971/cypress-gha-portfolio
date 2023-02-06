@@ -1,3 +1,5 @@
+"use strict";
+
 import MenuPage from "../../pageObjects/header/menu";
 
 describe('Verify appearing of product menu under hovering', () => {
