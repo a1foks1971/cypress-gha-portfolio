@@ -29,23 +29,25 @@ export class Menu extends Page {
   } = {}) {
     console.log("checkAllLinksOfMenuByName");
     console.log(dbg, "menuName", menuName);
-    this.verifyVisibilityOfMenuByName({
+    return this.verifyVisibilityOfMenuByName({
       menuName: menuName,
       dbg: dbg,
       timeout: timeout,
       expectVisible: false,
-    });
-    this.getMenuByName({
-      menuName: menuName,
-      dbg: dbg,
-      timeout: timeout
-    })
-    .realHover();
-    this.verifyVisibilityOfMenuByName({
-      menuName: menuName,
-      dbg: dbg,
-      timeout: timeout,
-      expectVisible: true,
+    }).then(()=>{
+      return this.getMenuByName({
+        menuName: menuName,
+        dbg: dbg,
+        timeout: timeout
+      })
+      .realHover();
+    }).then(()=>{
+      return this.verifyVisibilityOfMenuByName({
+        menuName: menuName,
+        dbg: dbg,
+        timeout: timeout,
+        expectVisible: true,
+      });
     });
   }
 
@@ -131,33 +133,35 @@ export class Menu extends Page {
     console.log("menuName", menuName);
     console.log("columnName", columnName);
     console.log("itemName", itemName);
-    this.getMenuByName({
+    return this.getMenuByName({
       menuName: menuName,
       dbg: dbg,
       timeout: timeout
     })
-    .realHover();
-    return this.getMenuFrameElmOfMenuByName({
-      menuName: menuName,
-      dbg: dbg,
-      timeout: timeout
-    }).then(($menuFrame)=>{
-      console.log(" $menuFrame", $menuFrame);
-      if ($menuFrame === null) {
-        console.log(`WARNING: Menu element is not found`)
-        return null;
-      };
-      cy.wrap($menuFrame)
-      .should(`be.visible`);
-      this.selectItemOfMenuByName({
-        $menuFrame: $menuFrame,
-        columnName: columnName,
-        itemName: itemName,
+    .realHover().then(()=>{
+      
+      return this.getMenuFrameElmOfMenuByName({
+        menuName: menuName,
         dbg: dbg,
-        timeout: timeout,
-        expectVisible: true,
+        timeout: timeout
+      }).then(($menuFrame)=>{
+        console.log(" $menuFrame", $menuFrame);
+        if ($menuFrame === null) {
+          console.log(`WARNING: Menu element is not found`)
+          return null;
+        };
+        cy.wrap($menuFrame)
+        .should(`be.visible`);
+        return this.selectItemOfMenuByName({
+          $menuFrame: $menuFrame,
+          columnName: columnName,
+          itemName: itemName,
+          dbg: dbg,
+          timeout: timeout,
+          expectVisible: true,
         })
-    })
+      });
+    });
   }
 
   selectItemOfMenuByName({

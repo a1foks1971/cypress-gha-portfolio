@@ -11,18 +11,20 @@ class MenuSteps extends BaseStep {
     columnName,
     itemName
   } = {}){
-    MenuPage.checkAllLinksOfMenuByName({menuName: menuName});
-    MenuPage.selectMenu({
-      menuName: menuName,
-      columnName: columnName,
-      itemName: itemName,
-    })
-    SearchPage.Header.verifyH1({
-      expContains: [
-        menuName,
-        columnName
-      ]
-    })
+    return MenuPage.checkAllLinksOfMenuByName({menuName: menuName}).then(()=>{
+      return MenuPage.selectMenu({
+        menuName: menuName,
+        columnName: columnName,
+        itemName: itemName,
+      })
+    }).then(()=>{
+      return SearchPage.Header.verifyH1({
+        expContains: [
+          menuName,
+          columnName
+        ]
+      })
+    });
   }
 
 }

@@ -25,14 +25,17 @@ describe('Verify opening a product page', () => {
       columnName: products[0]["columnName"],
       itemName: products[0]["productType"],
     }; 
-    MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers);
+    return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
+      
+      const section_Womens_Size_4 = {
+        sectionName: sections[0]["sectionName"],
+        liObj: sections[0]["li"],
+        assertNotFound: true,
+      }; 
+      return SectionSteps.verifySection(section_Womens_Size_4);
+    // }).then(()=>{
+    });
 
-    const section_Womens_Size_4 = {
-      sectionName: sections[0]["sectionName"],
-      liObj: sections[0]["li"],
-      assertNotFound: true,
-    }; 
-    SectionSteps.verifySection(section_Womens_Size_4);
 
     // const section_Womens_Width_M = {
     //   sectionName: sections[0]["sectionName"],
