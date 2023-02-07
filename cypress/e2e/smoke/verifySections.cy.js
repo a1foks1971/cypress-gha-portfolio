@@ -103,6 +103,22 @@ it(`Verifies an item of the menu`, function() {
         section_Price_Index_1.expectedBreadcrumbs,
         section_Color_Index_1.expectedBreadcrumbs
       ]);
+    }).then(()=>{
+      return BreadCrumbsSteps.removeBreadcrumbsArray({
+        arrayNmamesForRemoving: [
+          section_Womens_Size_4.expectedBreadcrumbs,
+          section_Brand_Naot.expectedBreadcrumbs
+        ]
+      });
+    }).then(()=>{
+      return BreadCrumbsSteps.verifyAllBreadCrumbsTitles([
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.menuName,
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.columnName,
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.itemName,
+        section_Womens_Width_M.expectedBreadcrumbs,
+        section_Price_Index_1.expectedBreadcrumbs,
+        section_Color_Index_1.expectedBreadcrumbs
+      ]);
     });
 
   })

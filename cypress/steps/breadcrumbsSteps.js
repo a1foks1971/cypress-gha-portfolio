@@ -2,7 +2,7 @@
 
 import { BaseStep } from "./baseStep";
 import BreadCrumbsPage from "../pageObjects/searchWrapper/breadcrumbs/breadcrumbs";
-import { cy_wait } from "../util/functions";
+import { cy_wait, promiseChaining } from "../util/functions";
 
 class BreadCrumbsSteps extends BaseStep {
 
@@ -23,6 +23,16 @@ class BreadCrumbsSteps extends BaseStep {
       if (expBreadCrumbsTitle === "--") return Promise.resolve();
       return BreadCrumbsPage.waitForBreadcrumbsWithTitle({
         title: expBreadCrumbsTitle,
+      });
+    });
+  }
+
+  removeBreadcrumbsArray({
+    arrayNmamesForRemoving
+  } = {}){
+    return promiseChaining(_.times(arrayNmamesForRemoving.length), index=>{
+      return BreadCrumbsPage.removeFilterWithName({filterName: arrayNmamesForRemoving[index]}).then(()=>{
+        return cy_wait();
       });
     });
   }

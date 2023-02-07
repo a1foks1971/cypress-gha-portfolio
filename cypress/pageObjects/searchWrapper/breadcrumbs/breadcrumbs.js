@@ -2,9 +2,6 @@
 
 import _ from 'lodash';
 import { Page } from "../../Page";
-// import { Body } from "./body";
-// import { Header } from "./header";
-// import { Section } from "./section/section";
 import * as CONSTS from "../../../util/consts";
 import {console_log, promiseChaining} from "../../../util/functions";
 
@@ -13,22 +10,13 @@ const _css = {
     container: cContainer,
     title: `h2`,
     btnContainer: `#searchSelectedFilters`,
-    optionButtons: `#searchSelectedFilters>li>a`
-    // menues: `${cContainer}>ul>li`,
-    // menuLinks: `${cContainer}>ul>li>a`,
-    // menuContainer: `${cContainer}>ul>li>div`,
-    // frameColumns: `div>div>div`,
-    // columnName: `a.di-z`,
-    // columnItems: `ul>li>a`  
+    optionButtons: `#searchSelectedFilters>li>a`,
 }
 
 export class Breadcrumbs extends Page {
   constructor() {
       super();
       this.timeout = 16000;
-      // this.Body = new Body()
-      // this.Header = new Header()
-      // this.Section = new Section()
   }
 
   getBredcrumbsSection(){
@@ -109,6 +97,16 @@ export class Breadcrumbs extends Page {
       }).then(()=>{
         return Promise.resolve(titles);
       });
+    });
+  }
+
+  removeFilterWithName({
+    filterName
+  }={}){
+    return this.getBredcrumbsSection().then(($section)=>{
+      return cy.wrap($section)
+      .contains(filterName)
+      .click();
     });
   }
 
