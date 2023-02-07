@@ -43,25 +43,39 @@ it(`Verifies an item of the menu`, function() {
       assertNotFound: true,
       expectedBreadcrumbs: sections[1]["expectedBreadcrumbs"],
     }; 
+    const section_Brand_Naot = {
+      sectionName: sections[2]["sectionName"],
+      liObj: sections[2]["li"],
+      assertNotFound: true,
+      expectedBreadcrumbs: sections[2]["expectedBreadcrumbs"],
+    }; 
 
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
-
       return SectionSteps.verifySection(section_Womens_Size_4);
     }).then(()=>{
-      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle(section_Womens_Size_4);
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
+        expBreadCrumbsTitle: section_Womens_Size_4.expectedBreadcrumbs
+      });
     }).then(()=>{
-      // return SectionSteps.verifySection(section_Womens_Width_M).then(()=>{
-        return SectionSteps.verifySection(section_Womens_Width_M);
-      // });
+      return SectionSteps.verifySection(section_Womens_Width_M);
     }).then(()=>{
-      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle(section_Womens_Size_4);
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
+        expBreadCrumbsTitle: section_Womens_Width_M.expectedBreadcrumbs
+      });
+    }).then(()=>{
+      return SectionSteps.verifySection(section_Brand_Naot);
+    }).then(()=>{
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
+        expBreadCrumbsTitle: section_Brand_Naot.expectedBreadcrumbs
+      });
     }).then(()=>{
       return BreadCrumbsSteps.verifyBreadCrumbs([
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.menuName,
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.columnName,
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.itemName,
         section_Womens_Size_4.expectedBreadcrumbs,
-        section_Womens_Width_M.expectedBreadcrumbs
+        section_Womens_Width_M.expectedBreadcrumbs,
+        section_Brand_Naot.expectedBreadcrumbs
       ]);
     });
 

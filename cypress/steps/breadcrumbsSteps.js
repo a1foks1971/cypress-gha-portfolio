@@ -17,13 +17,11 @@ class BreadCrumbsSteps extends BaseStep {
   }
 
   waitForBreadcrumbsWithTitle({
-    sectionName,
-    liObj,
-    assertNotFound,
+    expBreadCrumbsTitle,
   }) {
     return cy.wait(3 * 1000).then(()=>{
       return BreadCrumbsPage.waitForBreadcrumbsWithTitle({
-        title: liObj.value,
+        title: expBreadCrumbsTitle,
       });
     });
   }
