@@ -20,27 +20,26 @@ describe('Verify opening a product page', () => {
   })
 
   it(`Verifies an item of the menu`, function() {
-    MenuSteps.verifyMenu({
+    const menu_Shoes_Womens_Sneakers = {
       menuName: products[0]["menuName"],
       columnName: products[0]["columnName"],
       itemName: products[0]["productType"],
-    });
-    SectionSteps.verifySection({
+    }; 
+    MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers);
+
+    const section_Womens_Size_4 = {
       sectionName: sections[0]["sectionName"],
       liObj: sections[0]["li"],
       assertNotFound: true,
-    });
-    // return MenuSteps.verifyMenu({
-    //   menuName: products[0]["menuName"],
-    //   columnName: products[0]["columnName"],
-    //   itemName: products[0]["productType"],
-    // }).then(()=>{
-    //   return SectionSteps.verifySection({
-    //     sectionName: sections[0]["sectionName"],
-    //     liObj: sections[0]["li"],
-    //     assertNotFound: true,
-    //   })
-    // });
+    }; 
+    SectionSteps.verifySection(section_Womens_Size_4);
+
+    // const section_Womens_Width_M = {
+    //   sectionName: sections[0]["sectionName"],
+    //   liObj: sections[0]["li"],
+    //   assertNotFound: true,
+    // }; 
+    // SectionSteps.verifySection(section_Womens_Width_M);
   })
 
 })
