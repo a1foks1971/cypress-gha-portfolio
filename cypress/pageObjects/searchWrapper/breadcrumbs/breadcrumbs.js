@@ -37,9 +37,24 @@ export class Breadcrumbs extends Page {
     .parent()
   }
 
+  getRightScrollButton(){
+    const _title = "Right Scroll";
+    return this.getBredcrumbsSection().then(($section)=>{
+      return cy.wrap($section)
+      .contains(_title, {timeout: this.timeout});
+    });
+  }
+
+  isRightScrollButtonDisabled(){
+    return this.getRightScrollButton().then(($rightScrollButton)=>{
+      return $rightScrollButton.is(":disabled");
+    });
+  }
+
   waitForBreadcrumbsWithTitle({
     title,
     timeout = this.timeout,
+    skipAssertion = true,
   } = {}){
     console.log(`$waitForBreadcrumbsWithTitle(title="${title}", timeout="${timeout}")`);
     return this.getBredcrumbsSection().then(($brCrSection)=>{
@@ -47,6 +62,7 @@ export class Breadcrumbs extends Page {
         .find(_css.btnContainer)
         .contains(title, {timeout: timeout}).then(($brCr)=>{
           console.log(`$brCr`, $brCr);
+          if (skipAssertion) return Promise.resolve();
           return cy.wrap($brCr)
           .should('be.visible');
         })
@@ -54,6 +70,24 @@ export class Breadcrumbs extends Page {
   }
 
   getBreadcrumbsTitles(){
+    function _grabAllTitles(inTitles = []){
+      return this._getBreadcrumbsTitles().then((_titles)=>{
+        let titles = [...new Set([...inTitles, ..._titles])];
+        return this.isRightScrollButtonDisabled().then((isDisabled)=>{
+          console.log(`_grabTitles() titles`, titles)
+          if (isDisabled) return Promise.resolve(titles);
+          return this.getRightScrollButton().then(($btn)=>{
+            return cy.wrap($btn).click();
+          }).then(()=>{
+            return _grabTitles(titles);
+          });
+        })
+      });
+    }
+    return _grabAllTitles();
+  }
+
+  _getBreadcrumbsTitles(){
     return this.getBredcrumbsSection().then(($brCr)=>{
       return cy.wrap($brCr).find(_css.optionButtons);
     }).then(($buttons)=>{

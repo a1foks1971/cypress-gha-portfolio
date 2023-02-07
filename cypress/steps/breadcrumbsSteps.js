@@ -7,8 +7,8 @@ import BreadCrumbsPage from "../pageObjects/searchWrapper/breadcrumbs/breadcrumb
 
 class BreadCrumbsSteps extends BaseStep {
 
-  verifyBreadCrumbs(expectedTitleArray){
-    return BreadCrumbsPage.getBreadcrumbsTitles().then((titles)=>{
+  verifyAllBreadCrumbsTitles(expectedTitleArray){
+    return BreadCrumbsPage._getBreadcrumbsTitles().then((titles)=>{
       console.log(`expectedTitleArray`, expectedTitleArray)
       console.log(`titles`, titles)
       let isAllRight = expectedTitleArray.every(exp => titles.some(title => title.includes(exp)));

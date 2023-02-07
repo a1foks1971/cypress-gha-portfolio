@@ -49,6 +49,12 @@ it(`Verifies an item of the menu`, function() {
       assertNotFound: true,
       expectedBreadcrumbs: sections[2]["expectedBreadcrumbs"],
     }; 
+    const section_Price_Index_1 = {
+      sectionName: sections[3]["sectionName"],
+      liObj: sections[3]["li"],
+      assertNotFound: true,
+      expectedBreadcrumbs: sections[3]["expectedBreadcrumbs"],
+    }; 
 
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
       return SectionSteps.verifySection(section_Womens_Size_4);
@@ -69,13 +75,20 @@ it(`Verifies an item of the menu`, function() {
         expBreadCrumbsTitle: section_Brand_Naot.expectedBreadcrumbs
       });
     }).then(()=>{
-      return BreadCrumbsSteps.verifyBreadCrumbs([
+      return SectionSteps.verifySection(section_Price_Index_1);
+    }).then(()=>{
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
+        expBreadCrumbsTitle: section_Price_Index_1.expectedBreadcrumbs,
+      });
+    }).then(()=>{
+      return BreadCrumbsSteps.verifyAllBreadCrumbsTitles([
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.menuName,
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.columnName,
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.itemName,
         section_Womens_Size_4.expectedBreadcrumbs,
         section_Womens_Width_M.expectedBreadcrumbs,
-        section_Brand_Naot.expectedBreadcrumbs
+        section_Brand_Naot.expectedBreadcrumbs,
+        section_Price_Index_1.expectedBreadcrumbs
       ]);
     });
 
