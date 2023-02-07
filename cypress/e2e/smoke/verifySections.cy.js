@@ -1,10 +1,8 @@
 "use strict";
 
-import MenuPage from "../../pageObjects/header/menu";
 import MenuSteps from "../../steps/menuSteps";
 import SectionSteps from "../../steps/sectionSteps";
 import BreadCrumbsSteps from "../../steps/breadcrumbsSteps";
-import SearchPage from "../../pageObjects/searchWrapper/search";
 
 describe('Verify opening a product page', () => {
   let products = [];
@@ -55,6 +53,12 @@ it(`Verifies an item of the menu`, function() {
       assertNotFound: true,
       expectedBreadcrumbs: sections[3]["expectedBreadcrumbs"],
     }; 
+    const section_Color_Index_1 = {
+      sectionName: sections[4]["sectionName"],
+      liObj: sections[4]["li"],
+      assertNotFound: true,
+      expectedBreadcrumbs: sections[4]["expectedBreadcrumbs"],
+    }; 
 
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
       return SectionSteps.verifySection(section_Womens_Size_4);
@@ -76,9 +80,17 @@ it(`Verifies an item of the menu`, function() {
       });
     }).then(()=>{
       return SectionSteps.verifySection(section_Price_Index_1);
-    }).then(()=>{
+    }).then((newExpectedTitle)=>{
+      section_Price_Index_1.expectedBreadcrumbs = newExpectedTitle;
       return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
         expBreadCrumbsTitle: section_Price_Index_1.expectedBreadcrumbs,
+      });
+    }).then(()=>{
+      return SectionSteps.verifySection(section_Color_Index_1);
+    }).then((newExpectedTitle)=>{
+      section_Color_Index_1.expectedBreadcrumbs = newExpectedTitle;
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
+        expBreadCrumbsTitle: section_Color_Index_1.expectedBreadcrumbs,
       });
     }).then(()=>{
       return BreadCrumbsSteps.verifyAllBreadCrumbsTitles([
@@ -88,7 +100,8 @@ it(`Verifies an item of the menu`, function() {
         section_Womens_Size_4.expectedBreadcrumbs,
         section_Womens_Width_M.expectedBreadcrumbs,
         section_Brand_Naot.expectedBreadcrumbs,
-        section_Price_Index_1.expectedBreadcrumbs
+        section_Price_Index_1.expectedBreadcrumbs,
+        section_Color_Index_1.expectedBreadcrumbs
       ]);
     });
 

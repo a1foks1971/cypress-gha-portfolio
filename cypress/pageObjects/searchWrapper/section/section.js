@@ -73,10 +73,6 @@ export class Section extends Page {
     .invoke(CONSTS.HTML.PROP.TEXT);
   }
 
-  // getH3Elm() {
-  //   return cy.get(_css.h3, {timeout: this.timeout});
-  // }
-
   selectSection({
     sectionName,
     liObj,
@@ -92,7 +88,10 @@ export class Section extends Page {
       return LiSectionElm.selectLi({
         liObj: liObj,
         assertNotFound: assertNotFound,
-      })
+      }).then((liTitle)=>{
+        console.log(">>>> Output 'li Title'", liTitle);
+        return Promise.resolve(liTitle);
+      });
     })
   }
 

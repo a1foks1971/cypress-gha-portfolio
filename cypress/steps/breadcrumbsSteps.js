@@ -1,13 +1,13 @@
 "use strict";
 
 import { BaseStep } from "./baseStep";
-// import MenuPage from "../pageObjects/header/menu";
-// import SearchPage from "../pageObjects/searchWrapper/search";
 import BreadCrumbsPage from "../pageObjects/searchWrapper/breadcrumbs/breadcrumbs";
+import { cy_wait } from "../util/functions";
 
 class BreadCrumbsSteps extends BaseStep {
 
-  verifyAllBreadCrumbsTitles(expectedTitleArray){
+  verifyAllBreadCrumbsTitles(_expectedTitleArray){
+    const expectedTitleArray = _expectedTitleArray.filter(title => title !== "--");
     return BreadCrumbsPage._getBreadcrumbsTitles().then((titles)=>{
       console.log(`expectedTitleArray`, expectedTitleArray)
       console.log(`titles`, titles)
@@ -19,7 +19,8 @@ class BreadCrumbsSteps extends BaseStep {
   waitForBreadcrumbsWithTitle({
     expBreadCrumbsTitle,
   }) {
-    return cy.wait(3 * 1000).then(()=>{
+    return cy_wait().then(()=>{
+      if (expBreadCrumbsTitle === "--") return Promise.resolve();
       return BreadCrumbsPage.waitForBreadcrumbsWithTitle({
         title: expBreadCrumbsTitle,
       });

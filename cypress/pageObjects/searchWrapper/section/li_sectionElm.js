@@ -2,7 +2,7 @@
 
 import { Page } from "../../Page";
 import * as CONSTS from "../../../util/consts";
-import {console_log} from "../../../util/functions";
+import {console_log, cy_wait} from "../../../util/functions";
 
 const cContainer = '#searchFilterModalOverlay #searchFilters section';
 const _css = {
@@ -31,7 +31,6 @@ export class Li_SectionElm extends Page {
   getLiElmS(){
     return this.getThisSectionElm().then(($section)=>{
       return cy.wrap($section).find(_css.li);
-      // return cy.get(_css.li);
     });
   }
 
@@ -40,7 +39,7 @@ export class Li_SectionElm extends Page {
     assertNotFound = true,
   }={}){
     return this.getLiElmS().then(($liS)=>{
-      return cy.wrap($liS[liIndex]);
+      return Promise.resolve($liS[liIndex]);
     });
   }
 
@@ -52,12 +51,12 @@ export class Li_SectionElm extends Page {
       let self = this;
       function _getIndexOfLiWithName(_$elmS, _index, expName) {
         console.log("$_getIndexOfLiWithName() _index = ", _index);
-        if (_index >= _$elmS.length) return null;
+        if (_index >= _$elmS.length) return Promise.resolve(null);
         return self.getNameOfLiElm(_$elmS[_index]).then((_name)=>{
           console.log("_name", _name);
           if (expName == _name) {
             console.log(`The item with name "${_name}" has been found. Searched index is ${_index}`);
-            return _index;
+            return Promise.resolve(_index);
           }
           return _getIndexOfLiWithName(_$elmS, _index + 1, expName);
         });
@@ -88,17 +87,12 @@ export class Li_SectionElm extends Page {
   }
 
   getNameOfLiElm($elm){
-    // expect($elm).to.be.visible
     console.log("$elm", $elm)
     return cy.wrap($elm)
     .scrollIntoView()
     .find(_css.name)
     .invoke(CONSTS.HTML.PROP.TEXT);
   }
-
-  // getH3Elm() {
-  //   return cy.get(_css.h3, {timeout: this.timeout});
-  // }
 
   selectLi({
     liObj,
@@ -113,11 +107,16 @@ export class Li_SectionElm extends Page {
         liIndex: liIndex,
         assertNotFound: assertNotFound,
       }).then(($li)=>{
-        console.log("$li", $li);
+        console.log("$li_1", $li);
         return cy.wrap($li)
-          .scrollIntoView()
-          .find(_css.button)
-          .click();
+        .scrollIntoView()
+        .find(_css.button)
+        .click().then(()=>{
+          console.log("$li_2", $li);
+          return cy.wrap($li)
+            .find(_css.name)
+            .invoke(CONSTS.HTML.PROP.TEXT);
+        });
       });
     });
 
@@ -129,7 +128,11 @@ export class Li_SectionElm extends Page {
   }={}) {
     console.log("liObj.type", liObj.type);
     console.log("liObj.value", liObj.value);
-    if (liObj.type === CONSTS.FIXTURE_PROPERTIES.SECTIONS.LI.TYPE.INDEX) return Promise.resolve(liObj.value);
+    if (liObj.type === CONSTS.FIXTURE_PROPERTIES.SECTIONS.LI.TYPE.INDEX) {
+      return cy_wait().then(()=>{
+        return Promise.resolve(liObj.value);
+      });
+    }
     return this.getIndexOfLiWithName({liName: liObj.value});
   }
 

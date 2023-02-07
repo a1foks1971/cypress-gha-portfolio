@@ -21,3 +21,9 @@ export const promiseChaining = (arr, func) => {
     });
   }, Promise.resolve());
 };
+
+export function cy_wait({
+  timeout = 1500,
+} = {}){
+  return cy.wait(timeout);
+}
