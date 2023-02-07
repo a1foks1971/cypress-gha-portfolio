@@ -12,6 +12,9 @@ export const TITLES = {
     BRAND: "Brand",
     PRICE: "Price",
     COLOR: "Color",
+  },
+  BREADCRUMBS: {
+    TITLE: "Your Selections",
   }
 };
 export const FIXTURE_PROPERTIES = {

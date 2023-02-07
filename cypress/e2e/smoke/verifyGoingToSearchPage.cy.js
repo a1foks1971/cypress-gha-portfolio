@@ -17,9 +17,9 @@ describe('Verify opening a product page', () => {
   it(`Verifies an item of the menu`, function() {
 
     const menu_Shoes_Womens_Sneakers = {
-      menuName: products[0]["menuName"],
-      columnName: products[0]["columnName"],
-      itemName: products[0]["productType"],
+      menuName: products[0]["menuName"]["title"],
+      columnName: products[0]["columnName"]["title"],
+      itemName: products[0]["productType"]["title"],
     }; 
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers)
   })
@@ -27,9 +27,9 @@ describe('Verify opening a product page', () => {
   it(`Verifies another item of the menu`, function() {
 
     const menu_Clothing_Mens_Sweaters = {
-      menuName: products[1]["menuName"],
-      columnName: products[1]["columnName"],
-      itemName: products[1]["productType"],
+      menuName: products[1]["menuName"]["title"],
+      columnName: products[1]["columnName"]["title"],
+      itemName: products[1]["productType"]["title"],
     }; 
     return MenuSteps.verifyMenu(menu_Clothing_Mens_Sweaters)
   })

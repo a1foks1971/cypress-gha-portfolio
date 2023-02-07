@@ -3,6 +3,7 @@
 import MenuPage from "../../pageObjects/header/menu";
 import MenuSteps from "../../steps/menuSteps";
 import SectionSteps from "../../steps/sectionSteps";
+import BreadCrumbsSteps from "../../steps/breadcrumbsSteps";
 import SearchPage from "../../pageObjects/searchWrapper/search";
 
 describe('Verify opening a product page', () => {
@@ -19,30 +20,51 @@ describe('Verify opening a product page', () => {
     cy.visit('https://www.6pm.com/');
   })
 
-  it(`Verifies an item of the menu`, function() {
+it(`Verifies an item of the menu`, function() {
     const menu_Shoes_Womens_Sneakers = {
-      menuName: products[0]["menuName"],
-      columnName: products[0]["columnName"],
-      itemName: products[0]["productType"],
+      menuName: products[0]["menuName"]["title"],
+      columnName: products[0]["columnName"]["title"],
+      itemName: products[0]["productType"]["title"],
     }; 
+    const expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers = {
+      menuName: products[0]["menuName"]["expectedBreadcrumbs"],
+      columnName: products[0]["columnName"]["expectedBreadcrumbs"],
+      itemName: products[0]["productType"]["expectedBreadcrumbs"],
+    }; 
+    const section_Womens_Size_4 = {
+      sectionName: sections[0]["sectionName"],
+      liObj: sections[0]["li"],
+      assertNotFound: true,
+      expectedBreadcrumbs: sections[0]["expectedBreadcrumbs"],
+    }; 
+    const section_Womens_Width_M = {
+      sectionName: sections[1]["sectionName"],
+      liObj: sections[1]["li"],
+      assertNotFound: true,
+      expectedBreadcrumbs: sections[1]["expectedBreadcrumbs"],
+    }; 
+
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
-      
-      const section_Womens_Size_4 = {
-        sectionName: sections[0]["sectionName"],
-        liObj: sections[0]["li"],
-        assertNotFound: true,
-      }; 
+
       return SectionSteps.verifySection(section_Womens_Size_4);
-    // }).then(()=>{
+    }).then(()=>{
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle(section_Womens_Size_4);
+    }).then(()=>{
+      // return SectionSteps.verifySection(section_Womens_Width_M).then(()=>{
+        return SectionSteps.verifySection(section_Womens_Width_M);
+      // });
+    }).then(()=>{
+      return BreadCrumbsSteps.waitForBreadcrumbsWithTitle(section_Womens_Size_4);
+    }).then(()=>{
+      return BreadCrumbsSteps.verifyBreadCrumbs([
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.menuName,
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.columnName,
+        expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers.itemName,
+        section_Womens_Size_4.expectedBreadcrumbs,
+        section_Womens_Width_M.expectedBreadcrumbs
+      ]);
     });
 
-
-    // const section_Womens_Width_M = {
-    //   sectionName: sections[0]["sectionName"],
-    //   liObj: sections[0]["li"],
-    //   assertNotFound: true,
-    // }; 
-    // SectionSteps.verifySection(section_Womens_Width_M);
   })
 
 })

@@ -12,7 +12,7 @@ class SectionSteps extends BaseStep {
     liObj,
     assertNotFound = true,
   } = {}){
-    SectionPage.selectSection({
+    return SectionPage.selectSection({
       sectionName: sectionName,
       liObj: liObj,
       assertNotFound: assertNotFound,
