@@ -23,7 +23,9 @@ it(`Verifies an item of the menu`, function() {
       menuName: products[0]["menuName"]["title"],
       columnName: products[0]["columnName"]["title"],
       itemName: products[0]["productType"]["title"],
-    }; 
+      expColumnInHeader: products[0]["columnName"]["expectedBreadcrumbs"],
+      expItemInHeader: products[0]["productType"]["expectedBreadcrumbs"],
+  }; 
     const expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers = {
       menuName: products[0]["menuName"]["expectedBreadcrumbs"],
       columnName: products[0]["columnName"]["expectedBreadcrumbs"],

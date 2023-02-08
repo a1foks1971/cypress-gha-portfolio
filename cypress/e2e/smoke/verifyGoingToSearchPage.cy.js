@@ -21,7 +21,9 @@ describe('Verify opening a product page', () => {
       menuName: products[index_Shoes_Womens_Sneakers]["menuName"]["title"],
       columnName: products[index_Shoes_Womens_Sneakers]["columnName"]["title"],
       itemName: products[index_Shoes_Womens_Sneakers]["productType"]["title"],
-    }; 
+      expColumnInHeader: products[index_Shoes_Womens_Sneakers]["columnName"]["expectedBreadcrumbs"],
+      expItemInHeader: products[index_Shoes_Womens_Sneakers]["productType"]["expectedBreadcrumbs"],
+    };
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers)
   })
 
@@ -32,7 +34,9 @@ describe('Verify opening a product page', () => {
       menuName: products[index_Clothing_Mens_Sweaters]["menuName"]["title"],
       columnName: products[index_Clothing_Mens_Sweaters]["columnName"]["title"],
       itemName: products[index_Clothing_Mens_Sweaters]["productType"]["title"],
-    }; 
+      expColumnInHeader: products[index_Clothing_Mens_Sweaters]["columnName"]["expectedBreadcrumbs"],
+      expItemInHeader: products[index_Clothing_Mens_Sweaters]["productType"]["expectedBreadcrumbs"],
+    };
     return MenuSteps.verifyMenu(menu_Clothing_Mens_Sweaters)
   })
 

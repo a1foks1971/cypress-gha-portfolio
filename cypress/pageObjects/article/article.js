@@ -1,9 +1,11 @@
 "use strict";
 
-import { 
+import {
   SHOULD_BE as BE,
-  HTML as HTML } from "../../util/consts";
-import {console_log} from "../../util/functions";
+  HTML as HTML,
+  REG
+} from "../../util/consts";
+import {console_log, cy_wait} from "../../util/functions";
 
 const cContainer = 'article';
 const _css = {
@@ -51,7 +53,7 @@ export class Article {
   getTheAricleBody({
     $theArticle
   } = {}){
-    return cy.wrap($theArticle).find(_css.bodyDiv.figure).parent()    
+    return cy.wrap($theArticle).find(_css.bodyDiv.figure).parent();
   }
 
   verifyArticleWithIndex({
@@ -67,27 +69,21 @@ export class Article {
   }
 
   verifyHeartButton($articleBody) {
-    console.log("$articleBody", $articleBody);
     return  cy.wrap($articleBody).find(_css.bodyDiv.heartButton.button).then(($btn)=>{
       return Promise.resolve().then(()=>{
         return cy.wrap($btn).should(BE.VISIBLE);
       }).then(()=>{
         return cy.wrap($btn).find(_css.bodyDiv.heartButton.peopleNumber).then(($peopleNumber)=>{
-          console.log("$peopleNumber", $peopleNumber);
           return Promise.resolve().then(()=>{
             return cy.wrap($peopleNumber).should(BE.VISIBLE);
           }).then(()=>{
             return cy.wrap($peopleNumber).invoke(HTML.PROP.TEXT).then((_peopleNumber)=>{
-              console.log("_peopleNumber", _peopleNumber);
-              return  Promise.resolve();
+              return  cy.wrap(_peopleNumber).should(BE.MATCH, REG.THE_FIRST_IS_DIGITAL);
             });
-            // }).should("match", /^[0-9]*$/);
           });
         })
       });
-
-    })
+    });
   }
-
 
 }

@@ -29,4 +29,9 @@ export const FIXTURE_PROPERTIES = {
 };
 export const SHOULD_BE = {
   VISIBLE: 'be.visible',
+  MATCH: 'match',
+}
+export const REG = {
+  ONLY_DIGITALS: /^[0-9]*$/,
+  THE_FIRST_IS_DIGITAL: /^[0-9]/,
 }

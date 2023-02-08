@@ -28,7 +28,7 @@ export class Menu extends Page {
       timeout = this.timeout,
   } = {}) {
     console.log("checkAllLinksOfMenuByName");
-    console.log(dbg, "menuName", menuName);
+    console.log("menuName", menuName);
     return this.verifyVisibilityOfMenuByName({
       menuName: menuName,
       dbg: dbg,
@@ -40,7 +40,8 @@ export class Menu extends Page {
         dbg: dbg,
         timeout: timeout
       })
-      .realHover();
+    }).then(($menu)=>{
+      return cy.wrap($menu).realHover();
     }).then(()=>{
       return this.verifyVisibilityOfMenuByName({
         menuName: menuName,
@@ -56,7 +57,7 @@ export class Menu extends Page {
     dbg = CONSTS.DEBUG_MODE,
     timeout = this.timeout,
     } = {}){
-    console.log(dbg, "_css.header", _css.header);
+    console.log("getMenuByName()", menuName);
     return cy.get(_css.container, {timeout: timeout}).contains(menuName);
   }
 
@@ -91,7 +92,8 @@ export class Menu extends Page {
     timeout = this.timeout,
     expectVisible = true,
     } = {}){
-    return this.getMenuFrameElmOfMenuByName({
+      console.log("verifyVisibilityOfMenuByName");
+      return this.getMenuFrameElmOfMenuByName({
       menuName: menuName,
       dbg: dbg,
       timeout: timeout
@@ -110,7 +112,7 @@ export class Menu extends Page {
     dbg = CONSTS.DEBUG_MODE,
     timeout = this.timeout,
     } = {}){
-      console.log(" -- getMenuFrameElmOfMenuByName()");
+      console.log("getMenuFrameElmOfMenuByName()");
       return this.getIndexOfMenuWithName({menuName: menuName}).then((menuIndex)=>{
         console.log("menuIndex", menuIndex);
         if (menuIndex === null) {
@@ -130,6 +132,7 @@ export class Menu extends Page {
     dbg = CONSTS.DEBUG_MODE,
     timeout = this.timeout
   } = {}){
+    console.log(" -- selectMenu [pageObjects/header/menu.js]");
     console.log("menuName", menuName);
     console.log("columnName", columnName);
     console.log("itemName", itemName);
@@ -139,7 +142,6 @@ export class Menu extends Page {
       timeout: timeout
     })
     .realHover().then(()=>{
-      
       return this.getMenuFrameElmOfMenuByName({
         menuName: menuName,
         dbg: dbg,

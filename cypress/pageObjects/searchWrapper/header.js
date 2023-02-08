@@ -19,7 +19,10 @@ export class Header extends Page {
   getH1Text() {
     return this.getH1Elm().then(($h1)=>{
       return cy.wrap($h1)
-      .invoke(CONSTS.HTML.PROP.TEXT);
+      .invoke(CONSTS.HTML.PROP.TEXT).then((h1)=>{
+        console.log(`=============== h1`, h1);
+        return Promise.resolve(h1);
+      });
     })
   }
 
@@ -28,16 +31,19 @@ export class Header extends Page {
   }
 
   verifyH1({
-    expContais = []
+    expContains = []
   }={}) {
     return this.getH1Text().then((_textH1)=>{
-      let answer = expContais.every(_subStr => {
-        const _includes = _textH1.includes(_subStr);
-        if (!_includes) console.log(`The title "${_textH1}" doesn't contains "${_subStr}"`)
+      console.log(`actual _textH1`, _textH1);
+      console.log(`expected contains`, expContains);
+      let answer = expContains.every(_subStr => {
+        const _includes = _textH1.toLowerCase().includes(_subStr.toLowerCase());
+        if (!_includes) console.log(`The title "${_textH1.toLowerCase()}" doesn't contains "${_subStr.toLowerCase()}"`)
+        return _includes;
       });
-      expect(answer, "The header should contain selected menu options").to.be.true;
+      return expect(answer, "The header should contain selected menu options").to.be.true;
     })
   }
-
+ 
 
 }

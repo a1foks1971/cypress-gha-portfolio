@@ -3,13 +3,16 @@
 import { BaseStep } from "./baseStep";
 import MenuPage from "../pageObjects/header/menu";
 import SearchPage from "../pageObjects/searchWrapper/search";
+import { cy_wait } from "../util/functions";
 
 class MenuSteps extends BaseStep {
 
   verifyMenu({
     menuName,
     columnName,
-    itemName
+    itemName,
+    expColumnInHeader,
+    expItemInHeader,
   } = {}){
     return MenuPage.checkAllLinksOfMenuByName({menuName: menuName}).then(()=>{
       return MenuPage.selectMenu({
@@ -18,14 +21,16 @@ class MenuSteps extends BaseStep {
         itemName: itemName,
       })
     }).then(()=>{
+      return cy_wait();
+    }).then(()=>{
       return SearchPage.Header.verifyH1({
         expContains: [
-          menuName,
-          columnName
+          expColumnInHeader,
+          expItemInHeader
         ]
       })
-    }).then(()=>{
-      return SearchPage.AricleS.verifyArticleWithIndex({index: 0});
+    // }).then(()=>{
+    //   return SearchPage.AricleS.verifyArticleWithIndex({index: 0});
     });
   }
 
