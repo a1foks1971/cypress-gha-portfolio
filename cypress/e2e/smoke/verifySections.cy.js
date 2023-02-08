@@ -38,13 +38,14 @@ it(`Verifies an item of the menu`, function() {
       },
       "expectedBreadcrumbs": "4"
       },
+      If liObj.type = "index" the expectedBreadcrumbs should be updated after adding the filter (***)
     */
     const fixtureIndex_Womens_Size = 0;
     const fixtureIndex_Womens_Width = 1;
     const fixtureIndex_Brand_Naot = 2;
     const fixtureIndex_Price = 3;
     const fixtureIndex_Color = 4;
-    
+
     const section_Womens_Size = sections[fixtureIndex_Womens_Size];
     const section_Womens_Width = sections[fixtureIndex_Womens_Width]; 
     const section_Brand_Naot = sections[fixtureIndex_Brand_Naot]; 
@@ -72,14 +73,14 @@ it(`Verifies an item of the menu`, function() {
     }).then(()=>{
       return SectionSteps.verifySection(section_Price_Index_);
     }).then((newExpectedTitle)=>{
-      section_Price_Index_.expectedBreadcrumbs = newExpectedTitle;
+      section_Price_Index_.expectedBreadcrumbs = newExpectedTitle; //Watch (***)
       return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
         expBreadCrumbsTitle: section_Price_Index_.expectedBreadcrumbs,
       });
     }).then(()=>{
       return SectionSteps.verifySection(section_Color_Index_);
     }).then((newExpectedTitle)=>{
-      section_Color_Index_.expectedBreadcrumbs = newExpectedTitle;
+      section_Color_Index_.expectedBreadcrumbs = newExpectedTitle; //Watch (***)
       return BreadCrumbsSteps.waitForBreadcrumbsWithTitle({
         expBreadCrumbsTitle: section_Color_Index_.expectedBreadcrumbs,
       });

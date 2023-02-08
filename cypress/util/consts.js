@@ -26,4 +26,7 @@ export const FIXTURE_PROPERTIES = {
       }
     }
   }
+};
+export const SHOULD_BE = {
+  VISIBLE: 'be.visible',
 }

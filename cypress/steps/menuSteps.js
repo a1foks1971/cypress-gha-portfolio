@@ -24,6 +24,8 @@ class MenuSteps extends BaseStep {
           columnName
         ]
       })
+    }).then(()=>{
+      return SearchPage.AricleS.verifyArticleWithIndex({index: 0});
     });
   }
 
