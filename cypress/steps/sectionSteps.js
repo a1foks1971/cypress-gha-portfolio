@@ -1,8 +1,7 @@
 "use strict";
 
 import { BaseStep } from "./baseStep";
-// import MenuPage from "../pageObjects/header/menu";
-// import SearchPage from "../pageObjects/searchWrapper/search";
+import SearchPage from "../pageObjects/searchWrapper/search";
 import SectionPage from "../pageObjects/searchWrapper/section/section";
 
 class SectionSteps extends BaseStep {
@@ -17,6 +16,12 @@ class SectionSteps extends BaseStep {
       liObj: liObj,
       assertNotFound: assertNotFound,
     })
+  }
+
+  selectArticle({
+    articleIndex = 0,
+  }={}) {
+    return SearchPage.AricleS.openArticleWithIndex({indexFromZero: articleIndex});
   }
 
 }

@@ -6,6 +6,7 @@ import {
   REG
 } from "../../util/consts";
 import {console_log, cy_wait} from "../../util/functions";
+import { ignoreUncaughtException_All } from "../../util/handleError";
 
 const cContainer = 'article';
 const _css = {
@@ -82,6 +83,44 @@ export class Article {
             });
           });
         })
+      });
+    });
+  }
+
+  openArticleWithIndex({
+    indexFromZero = 0,
+    clickOpt = {},
+    handleError = {
+      beforeClick: true,
+    }
+  } = {}){
+    return cy.get(`${_css.article}:nth-of-type(${indexFromZero + 1})>a`).then(($elm)=>{
+      return Promise.resolve().then(()=>{
+        if (!handleError.beforeClick) return Promise.resolve();
+        return ignoreUncaughtException_All();
+      }).then(()=>{
+        return cy.wrap($elm).click(clickOpt).then(()=>{
+          return cy_wait();
+        });
+      });
+    });
+  }
+
+  openArticle({
+    $theArticle,
+    clickOpt = {},
+    handleError = {
+      beforeClick: true,
+    }
+  } = {}){
+    return cy.wrap($theArticle).find(_css.bodyDiv.figure).then(($elm)=>{
+      return Promise.resolve().then(()=>{
+        if (!handleError.beforeClick) return Promise.resolve();
+        return ignoreUncaughtException_All();
+      }).then(()=>{
+        return cy.wrap($elm).click(clickOpt).then(()=>{
+          return cy_wait();
+        });
       });
     });
   }

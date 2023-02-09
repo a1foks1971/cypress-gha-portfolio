@@ -42,6 +42,18 @@ class MenuSteps extends BaseStep {
     });
   }
 
+  selectMenu({
+    menuName,
+    columnName,
+    itemName,
+  } = {}){
+    return MenuPage.selectMenu({
+      menuName: menuName,
+      columnName: columnName,
+      itemName: itemName,
+    })
+  }
+
 }
 
 export default new MenuSteps();

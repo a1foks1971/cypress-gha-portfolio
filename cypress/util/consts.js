@@ -2,7 +2,12 @@ export const DEBUG_MODE = true;
 export const HTML = {
   PROP: {
     TEXT: 'text',
-  }
+    ALT: 'alt',
+    HREF: 'href',
+  },
+  STR: {
+    ATTR: 'attr'
+  },
 };
 export const TITLES = {
   SECTIONS: {
@@ -30,6 +35,9 @@ export const FIXTURE_PROPERTIES = {
 export const SHOULD_BE = {
   VISIBLE: 'be.visible',
   MATCH: 'match',
+}
+export const SHOULD_HAVE = {
+  ATTR: 'have.attr',
 }
 export const REG = {
   ONLY_DIGITALS: /^[0-9]*$/,

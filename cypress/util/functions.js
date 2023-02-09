@@ -1,3 +1,5 @@
+import * as CONSTS from "./consts";
+
 export function console_log(dbg){
   let _arr = [];
   for (let i = 0; i<arguments.length; i++){
@@ -22,7 +24,21 @@ export const promiseChaining = (arr, func) => {
 };
 
 export function cy_wait({
-  timeout = 1000,
+  timeout = 1400,
 } = {}){
   return cy.wait(timeout);
 }
+
+export function getAttribute({
+  $elm,
+  attrName = CONSTS.HTML.PROP.HREF
+}={}) {
+  return cy.wrap($elm).invoke(CONSTS.HTML.STR.ATTR, attrName);
+}
+
+export function getText({
+  $elm,
+}={}) {
+  return getAttribute({$elm: $elm, attrName: CONSTS.HTML.PROP.TEXT});
+}
+

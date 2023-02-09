@@ -8,5 +8,6 @@ export class Page {
         console.log("run_env", run_env);
         this.env = run_env ? run_env : Object.entries(envVar)[0][1];
         // this.env = run_env ? run_env : envVar.defEnv();
+        this.timeout = 16000;
     }
 }

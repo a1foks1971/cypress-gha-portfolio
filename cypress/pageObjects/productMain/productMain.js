@@ -2,9 +2,7 @@
 
 import { Page } from "../Page";
 import { MayLike } from "./mayLike/mayLike";
-import { Body } from "./body";
-import { Header } from "./header";
-import { Section } from "./section/section";
+import { Pictures } from "./pictures/pictures";
 import * as CONSTS from "../../util/consts";
 import {console_log} from "../../util/functions";
 
@@ -19,6 +17,7 @@ export class ProductMain extends Page {
       super();
       this.timeout = 16000;
       this.MayLike = new MayLike(_css.productRecap);
+      this.Pictures = new Pictures(_css.productRecap);
   }
 
 }
