@@ -4,4 +4,3 @@ reports/
 **/screenshots
 **/videos
 *.mp4
-cypress/fixtures

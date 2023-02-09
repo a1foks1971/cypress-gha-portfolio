@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "menuName": {
+        "title": "Shoes",
+        "expectedBreadcrumbs": "Shoes"
+      },
+      "columnName": {
+        "title": "Women's",
+        "expectedBreadcrumbs": "Women"
+      },
+      "productType": {
+        "title": "Sneakers",
+        "expectedBreadcrumbs": "Sneakers"
+      }
+    },
+    {
+      "menuName": {
+        "title": "Clothing",
+        "expectedBreadcrumbs": "Clothing"
+      },
+      "columnName": {
+        "title": "Men's",
+        "expectedBreadcrumbs": "Men"
+      },
+      "productType": {
+        "title": "Sweaters",
+        "expectedBreadcrumbs": "Sweaters"
+      }
+    }
+  ]
+}

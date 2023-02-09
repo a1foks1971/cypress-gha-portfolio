@@ -1,0 +1,22 @@
+{
+  "menus": [
+    {
+      "menuName": {
+        "title": "Shoes",
+        "expectedBreadcrumbs": "Shoes"
+      }
+    },
+    {
+      "menuName": {
+        "title": "Clothing",
+        "expectedBreadcrumbs": "Clothing"
+      }
+    },
+    {
+      "menuName": {
+        "title": "Bags",
+        "expectedBreadcrumbs": "Bags"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "sections": [
+    {
+      "sectionName": "Women's Size",
+      "liObj": {
+        "type": "name",
+        "value": "4"
+      },
+      "expectedBreadcrumbs": "4"
+    },
+    {
+      "sectionName": "Women's Width",
+      "liObj": {
+        "type": "name",
+        "value": "M"
+      },
+      "expectedBreadcrumbs": "M"
+    },
+    {
+      "sectionName": "Brand",
+      "liObj": {
+        "type": "name",
+        "value": "Naot"
+      },
+      "expectedBreadcrumbs": "Naot"
+    },
+    {
+      "sectionName": "Price",
+      "liObj": {
+        "type": "index",
+        "value": "1"
+      },
+      "expectedBreadcrumbs": "--"
+    },
+    {
+      "sectionName": "Color",
+      "liObj": {
+        "type": "index",
+        "value": "0"
+      },
+      "expectedBreadcrumbs": "--"
+    }
+  ]
+}
