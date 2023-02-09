@@ -7,6 +7,14 @@ import { cy_wait } from "../util/functions";
 
 class MenuSteps extends BaseStep {
 
+
+
+  checkAllLinksOfMenuByName({
+    menuName,
+  } = {}){
+    return MenuPage.checkAllLinksOfMenuByName({menuName: menuName});
+  }
+
   verifyMenu({
     menuName,
     columnName,
