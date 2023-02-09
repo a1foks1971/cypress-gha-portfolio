@@ -37,8 +37,8 @@ class MenuSteps extends BaseStep {
           expItemInHeader
         ]
       })
-    // }).then(()=>{
-    //   return SearchPage.AricleS.verifyArticleWithIndex({index: 0});
+    }).then(()=>{
+      return SearchPage.AricleS.verifyArticleWithIndex({index: 0});
     });
   }
 

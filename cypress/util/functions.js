@@ -22,7 +22,7 @@ export const promiseChaining = (arr, func) => {
 };
 
 export function cy_wait({
-  timeout = 1500,
+  timeout = 1000,
 } = {}){
   return cy.wait(timeout);
 }
