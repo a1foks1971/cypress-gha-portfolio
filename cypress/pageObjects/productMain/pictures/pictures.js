@@ -1,8 +1,7 @@
 "use strict";
 
-import { Page } from "../../Page";
 import * as CONSTS from "../../../util/consts";
-import {console_log, cy_wait} from "../../../util/functions";
+import {cy_wait} from "../../../util/functions";
 
 const cContainer = `div[style*="grid"]`;
 const _css = {
@@ -13,24 +12,23 @@ const _css = {
 export class Pictures {
   constructor({
     _parentContainerCSS,
-    timeout = CONSTS.DEFAULT.TIMEOUT0,
+    timeout = CONSTS.DEFAULT.TIMEOUT,
   }={}) {
     this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;
   }
 
   getContainerElm() {
-    console.log(`-- getContainerElm()`, this.parentContainerCSS, this.timeout);
     return cy_wait().then(()=>{
       return cy.get(this.parentContainerCSS, {timeout: this.timeout});
     });
   }
 
   getNumberOfPictures(){
-    console.log(`getNumberOfPictures() [pageObjects/productMain/pictures/pictures.js]`)
+    console.log(`- getNumberOfPictures() [pictures.js]`)
     return this.getContainerElm().then(($container)=>{
-      console.log(`getNumberOfPictures() --1`)
       return cy.wrap($container).find(_css.pictures).then(($picS)=>{
+        console.log(`-- getNumberOfPictures() : `, $picS.length);
         return Promise.resolve($picS.length);
       });
     });
@@ -40,10 +38,10 @@ export class Pictures {
     index = 0,
     clickOptObj = {timeout: this.timeout},
   }={}){
+    console.log(`- clickOnPictureWithIndex(${index}) [pictures.js]`)
     return this.getContainerElm().then(($container)=>{
       return cy.wrap($container).find(_css.pictures).then(($picS)=>{
         return cy.wrap($picS[index]).find(_css.button).then(($btn)=>{
-          console.log(`$btn`, $btn)
           return cy.wrap($btn).click(clickOptObj);
         });
       });

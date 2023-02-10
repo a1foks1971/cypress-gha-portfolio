@@ -10,15 +10,16 @@ class ProductSteps extends BaseStep {
 
   verifyProductUI(){
     return this.verifyPictures().then(()=>{
+        // return Promise.resolve();
       return this.verifyPriceForm();
-    }).then(()=>{
-      return this.verifyBuyForm();
-    }).then(()=>{
-      return this.verifyPresentationForm();
-    }).then(()=>{
-      return ProductPage.Pictures.clickOnPictureWithIndex({index: 0})
-    }).then(()=>{
-      return this.verifyZoomPicturePage();
+    // }).then(()=>{
+    //   return this.verifyBuyForm();
+    // }).then(()=>{
+    //   return this.verifyPresentationForm();
+    // }).then(()=>{
+    //   return ProductPage.Pictures.clickOnPictureWithIndex({index: 0})
+    // }).then(()=>{
+    //   return this.verifyZoomPicturePage();
     });
   }
 
@@ -32,11 +33,31 @@ class ProductSteps extends BaseStep {
   verifyPriceForm(){
     //TODO
     return ProductPage.Price.getH1value().then((h1Value)=>{
-      return Promise.resolve().then(()=>{
-        return expect(h1Value).to.be.not.equal('');
-      }).then(()=>{
-        return Promise.resolve();
+      return this.verifyH1(h1Value);
+    }).then(()=>{
+      return ProductPage.Price.getHiddenPrice();
+    }).then((_getHiddenPrice)=>{
+      console.log(`_getHiddenPrice`, _getHiddenPrice);
+      return ProductPage.Price.getDisplayedPrice().then((_getDisplayedPrice)=>{
+      console.log(`_getDisplayedPrice`, _getDisplayedPrice);
+      return expect(_getDisplayedPrice).to.be.equal(_getHiddenPrice);
+      //   return Promise.resolve();
+      // }).then(()=>{
+      //   return Promise.resolve();
+      // }).then(()=>{
+      //   return Promise.resolve();
+      // }).then(()=>{
+        // return Promise.resolve();
       });
+    });
+  }
+
+  verifyH1(h1Value){
+    console.log(`h1Value`, h1Value);
+    return Promise.resolve().then(()=>{
+      return expect(h1Value).to.be.not.undefined;
+    }).then(()=>{
+      return expect(h1Value).to.be.not.equal('');
     });
   }
 

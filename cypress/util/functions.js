@@ -31,14 +31,22 @@ export function cy_wait({
 
 export function getAttribute({
   $elm,
-  attrName = CONSTS.HTML.PROP.HREF
+  attrName = CONSTS.HTML.PROP.HREF,
+  msg = ''
 }={}) {
-  return cy.wrap($elm).invoke(CONSTS.HTML.STR.ATTR, attrName);
+  return cy.wrap($elm).invoke(CONSTS.HTML.STR.ATTR, attrName).then((answer)=>{
+    console.log(`getAttribute("${attrName}") : `, answer, msg);
+    return Promise.resolve(answer);
+  });
 }
 
 export function getText({
   $elm,
+  msg = '',
 }={}) {
-  return getAttribute({$elm: $elm, attrName: CONSTS.HTML.PROP.TEXT});
+  return cy.wrap($elm).invoke(CONSTS.HTML.PROP.TEXT).then((answer)=>{
+    console.log(`getText() : `, answer, msg);
+    return Promise.resolve(answer);
+  });
 }
 

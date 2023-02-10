@@ -1,6 +1,5 @@
 "use strict";
 
-import { Page } from "../../Page";
 import { Article } from "../../article/article";
 import * as CONSTS from "../../../util/consts";
 import {console_log} from "../../../util/functions";
@@ -17,7 +16,7 @@ export const TITLES = {
 export class MayLike{
   constructor({
     _parentContainerCSS,
-    timeout = CONSTS.DEFAULT.TIMEOUT0,
+    timeout = CONSTS.DEFAULT.TIMEOUT,
   }={}) {
     this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;

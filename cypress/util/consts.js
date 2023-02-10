@@ -7,6 +7,7 @@ export const HTML = {
     TEXT: 'text',
     ALT: 'alt',
     HREF: 'href',
+    AREA_LABEL: 'aria-label',
   },
   STR: {
     ATTR: 'attr'
