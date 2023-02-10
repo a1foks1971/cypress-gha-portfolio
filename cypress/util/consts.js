@@ -1,4 +1,7 @@
 export const DEBUG_MODE = true;
+export const DEFAULT = {
+  TIMEOUT: 16 * 1000,
+}
 export const HTML = {
   PROP: {
     TEXT: 'text',

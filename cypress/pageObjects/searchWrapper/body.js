@@ -15,9 +15,11 @@ const _css = {
     // columnItems: `ul>li>a`  
 }
 
-export class Body extends Page {
-  constructor() {
-      super();
-      this.timeout = 16000;
+export class Body {
+  constructor({
+    timeout = CONSTS.DEFAULT.TIMEOUT,
+  }={}) {
+    this.timeout = timeout;
   }
+
 }

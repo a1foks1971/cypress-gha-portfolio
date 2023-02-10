@@ -10,10 +10,13 @@ const _css = {
   button: `button`,
 }
 
-export class Pictures extends Page {
-  constructor(_parentContainerCSS) {
-      super();
-      this.parentContainerCSS = _parentContainerCSS;
+export class Pictures {
+  constructor({
+    _parentContainerCSS,
+    timeout = CONSTS.DEFAULT.TIMEOUT0,
+  }={}) {
+    this.timeout = timeout;
+    this.parentContainerCSS = _parentContainerCSS;
   }
 
   getContainerElm() {
@@ -33,15 +36,16 @@ export class Pictures extends Page {
     });
   }
 
-  zoomPictureWithIndex({
+  clickOnPictureWithIndex({
     index = 0,
     clickOptObj = {timeout: this.timeout},
   }={}){
     return this.getContainerElm().then(($container)=>{
       return cy.wrap($container).find(_css.pictures).then(($picS)=>{
-        return cy.wrap($picS[index])
-        .find(_css.button)
-        .click(clickOptObj);
+        return cy.wrap($picS[index]).find(_css.button).then(($btn)=>{
+          console.log(`$btn`, $btn)
+          return cy.wrap($btn).click(clickOptObj);
+        });
       });
     });
   }

@@ -14,12 +14,19 @@ export const TITLES = {
   HEADER: `Similar Items You May Like!`,
 }
 
-export class MayLike extends Page {
-  constructor(_parentContainerCSS) {
-      super();
-      this.parentContainerCSS = _parentContainerCSS;
-      this.timeout = 16000;
-      this.AricleS = new Article(this.parentContainerCSS + ' ' + _css.body);
+export class MayLike{
+  constructor({
+    _parentContainerCSS,
+    timeout = CONSTS.DEFAULT.TIMEOUT0,
+  }={}) {
+    this.timeout = timeout;
+    this.parentContainerCSS = _parentContainerCSS;
+    this.AricleS = new Article(
+      {
+        _parentContainerCSS: this.parentContainerCSS + ' ' + _css.body,
+        timeout: timeout,
+      }
+    );
   }
 
   getContainerElm() {

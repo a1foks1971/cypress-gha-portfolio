@@ -13,10 +13,13 @@ const _css = {
     sections: `${cContainer}`,
 }
 
-export class Section extends Page {
-  constructor() {
-      super();
-      this.timeout = 16000;
+export class Section {
+  constructor(
+    {
+      timeout = CONSTS.DEFAULT.TIMEOUT,
+    } = {}
+  ) {
+    this.timeout = timeout;
   }
 
   getSectionElmS({

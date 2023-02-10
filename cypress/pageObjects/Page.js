@@ -1,6 +1,7 @@
 "use strict";
 
 import envVar from "../config/envVars";
+import * as CONSTS from "../util/consts";
 
 export class Page {
     constructor() {
@@ -8,6 +9,6 @@ export class Page {
         console.log("run_env", run_env);
         this.env = run_env ? run_env : Object.entries(envVar)[0][1];
         // this.env = run_env ? run_env : envVar.defEnv();
-        this.timeout = 16000;
+        this.timeout = CONSTS.DEFAULT.TIMEOUT;
     }
 }

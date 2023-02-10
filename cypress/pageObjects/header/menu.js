@@ -19,7 +19,6 @@ const _css = {
 export class Menu extends Page {
   constructor() {
       super();
-      this.timeout = 16000;
   }
 
   checkAllLinksOfMenuByName({

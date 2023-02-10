@@ -21,7 +21,6 @@ export class Li_SectionElm extends Page {
   }={}) {
     super();
     this.section = $section;
-    this.timeout = 16000;
   }
 
   getThisSectionElm(){

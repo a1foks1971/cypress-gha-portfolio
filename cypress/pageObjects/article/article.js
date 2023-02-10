@@ -7,6 +7,7 @@ import {
 } from "../../util/consts";
 import {console_log, cy_wait} from "../../util/functions";
 import { ignoreUncaughtException_All } from "../../util/handleError";
+import * as CONSTS from "../../util/consts";
 
 const cContainer = 'article';
 const _css = {
@@ -28,9 +29,12 @@ export const TITLES = {
 }
 
 export class Article {
-  constructor(_parentContainerCSS) {
+  constructor({
+    _parentContainerCSS,
+    timeout = CONSTS.DEFAULT.TIMEOUT,
+  }={}) {
+    this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;
-    this.timeout = 16000;
   }
 
   getAllArticleS() {

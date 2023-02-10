@@ -10,10 +10,13 @@ const _css = {
     h1: `${cContainer} h1`,
 }
 
-export class Header extends Page {
-  constructor() {
-      super();
-      this.timeout = 16000;
+export class Header {
+  constructor(
+    {
+      timeout = CONSTS.DEFAULT.TIMEOUT,
+    } = {}
+  ) {
+    this.timeout = timeout;
   }
 
   getH1Text() {

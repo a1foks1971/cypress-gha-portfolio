@@ -18,12 +18,29 @@ const _css = {
 export class Search extends Page {
   constructor() {
       super();
-      this.timeout = 16000;
-      this.Body = new Body()
-      this.Header = new Header()
-      this.Section = new Section()
-      this.AricleS = new Article(_css.products);
-  }
+      this.Body = new Body(
+        {
+          timeout: this.timeout,
+        }
+      );
+      this.Header = new Header(
+        {
+          timeout: this.timeout,
+        }
+      );
+      this.Section = new Section(
+        {
+          timeout: this.timeout,
+        }
+      );
+      this.AricleS = new Article(
+        {
+          _parentContainerCSS: _css.products,
+          timeout: this.timeout,
+        }
+      );
+
+    }
 
 
 }

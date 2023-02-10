@@ -8,3 +8,21 @@
         (where T002 is a spec ID from cypress/config/specList.js)
     ./runid.sh --env=qa --spec=T002
         (where 'qa' is an env ID from cypress/config/envVars.js)
+
+###  Viewport
+1. Viewport options can be set in cypress.config.js
+<!-- 
+module.exports = defineConfig({
+  viewportWidth: 1920,
+  viewportHeight: 1080,
+    ...
+-->
+
+2. Viewport options can be set in a test
+<!-- 
+  beforeEach(()=>{
+    cy.viewport(1920, 1080);
+    cy.visit('https://www.6pm.com/');
+  })
+-->
+
