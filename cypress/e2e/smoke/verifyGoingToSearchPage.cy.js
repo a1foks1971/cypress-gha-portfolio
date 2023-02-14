@@ -1,7 +1,7 @@
 "use strict";
 
 import MenuSteps from "../../steps/menuSteps";
-import { getProduct_verifyMenu_Args } from "../../util/featureFn/getFeature_Product";
+import { getArgs_for_verifyMenu } from "../../util/featureFn/getFeature_Product";
 
 describe('Verify opening a product page', () => {
   let products = [];
@@ -15,9 +15,9 @@ describe('Verify opening a product page', () => {
       const index_Shoes_Womens_Sneakers = 0;
       const index_Clothing_Mens_Sweaters = 1;
 
-      return getProduct_verifyMenu_Args(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
+      return getArgs_for_verifyMenu(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
         menu_Shoes_Womens_Sneakers = _argObj;
-        return getProduct_verifyMenu_Args(products[index_Clothing_Mens_Sweaters]);
+        return getArgs_for_verifyMenu(products[index_Clothing_Mens_Sweaters]);
       }).then((_argObj)=>{
         menu_Clothing_Mens_Sweaters = _argObj;
       });

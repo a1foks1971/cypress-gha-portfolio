@@ -79,7 +79,7 @@ function _getProduct_ItemName({
   });
 }
 
-export function getProduct_verifyMenu_Args(product){
+export function getArgs_for_verifyMenu(product){
   let answer = {};
   console.log( "getProduct_verifyMenu_Args() product: ", product);
   return _getProduct_MenuName({product: product, property: cProductProperties.title}
@@ -101,7 +101,7 @@ export function getProduct_verifyMenu_Args(product){
   });
 }
 
-export function getProduct_verifyAllBreadCrumbsTitles_Args(product){
+export function getArgs_for_verifyAllBreadCrumbsTitles(product){
   let answer = {};
   console.log( "getProduct_verifyAllBreadCrumbsTitles_Args() product: ", product);
   return _getProduct_MenuName({product: product, property: cProductProperties.expectedBreadcrumbs}

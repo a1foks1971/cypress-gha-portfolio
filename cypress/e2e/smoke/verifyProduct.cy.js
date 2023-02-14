@@ -4,7 +4,7 @@ import MenuSteps from "../../steps/menuSteps";
 import ProductSteps from "../../steps/productSteps";
 import SearchSteps from "../../steps/searchSteps";
 import {
-  getProduct_verifyMenu_Args,
+  getArgs_for_verifyMenu,
 } from "../../util/featureFn/getFeature_Product";
 import { cy_wait } from "../../util/functions";
 
@@ -17,7 +17,7 @@ describe('Verify a product', () => {
     cy.fixture('productMenuItems').then((jsonItem) => {
       products = [...jsonItem.products];
       const index_Shoes_Womens_Sneakers = 0;
-      return getProduct_verifyMenu_Args(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
+      return getArgs_for_verifyMenu(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
         menu_Shoes_Womens_Sneakers = _argObj;
       });
     });

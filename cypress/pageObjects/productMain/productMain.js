@@ -47,12 +47,12 @@ export class ProductMain extends Page {
     //     timeout: this.timeout,
     //   }
     // );
-    // this.Buy = new Buy(
-    //   {
-    //     _parentContainerCSS: `${_css.productRecap} ${_css.}`,
-    //     timeout: this.timeout,
-    //   }
-    // );
+    this.Buy = new Buy(
+      {
+        _parentContainerCSS: `${_css.productRecap} ${_css.divBuyBox}`,
+        timeout: this.timeout,
+      }
+    );
   }
 
 }

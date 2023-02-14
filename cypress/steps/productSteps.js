@@ -10,10 +10,9 @@ class ProductSteps extends BaseStep {
 
   verifyProductUI(){
     return this.verifyPictures().then(()=>{
-        // return Promise.resolve();
       return this.verifyPriceForm();
-    // }).then(()=>{
-    //   return this.verifyBuyForm();
+    }).then(()=>{
+      return this.verifyBuyForm();
     // }).then(()=>{
     //   return this.verifyPresentationForm();
     // }).then(()=>{
@@ -31,7 +30,6 @@ class ProductSteps extends BaseStep {
   }
 
   verifyPriceForm(){
-    //TODO
     return ProductPage.Price.getH1value().then((h1Value)=>{
       return this.verifyH1(h1Value);
     }).then(()=>{
@@ -39,15 +37,8 @@ class ProductSteps extends BaseStep {
     }).then((_getHiddenPrice)=>{
       console.log(`_getHiddenPrice`, _getHiddenPrice);
       return ProductPage.Price.getDisplayedPrice().then((_getDisplayedPrice)=>{
-      console.log(`_getDisplayedPrice`, _getDisplayedPrice);
-      return expect(_getDisplayedPrice).to.be.equal(_getHiddenPrice);
-      //   return Promise.resolve();
-      // }).then(()=>{
-      //   return Promise.resolve();
-      // }).then(()=>{
-      //   return Promise.resolve();
-      // }).then(()=>{
-        // return Promise.resolve();
+        console.log(`_getDisplayedPrice`, _getDisplayedPrice);
+        return expect(_getDisplayedPrice).to.be.equal(_getHiddenPrice);
       });
     });
   }
@@ -62,8 +53,9 @@ class ProductSteps extends BaseStep {
   }
 
   verifyBuyForm(){
-    //TODO
-    return Promise.resolve();
+    return ProductPage.Buy.getButtonTitle().then((_actualButtonTitle)=>{
+      return expect(_actualButtonTitle).to.be.equal(ProductPage.Buy.TITLES.BUTTON);
+    });
   }
 
   verifyPresentationForm(){

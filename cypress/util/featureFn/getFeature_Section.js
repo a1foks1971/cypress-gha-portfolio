@@ -10,7 +10,7 @@
   If liObj.type = "index" the expectedBreadcrumbs should be updated after adding the filter (***)
 */
 
-export function getSection_verifySection_Args(section){
+export function getArgs_for_verifySection(section){
   let answer = section;
   return Promise.resolve(answer);
 }

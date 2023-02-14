@@ -1,37 +1,45 @@
 "use strict";
 
-import * as CONSTS from "../../util/consts";
+import {
+  SHOULD_BE as BE,
+  DEFAULT
+} from "../../util/consts";
 import {getText} from "../../util/functions";
 
 const _css = {
-  h1: 'h1',
-  body: `#alsoLike`,
+  form: `#buyBoxForm`,
+  button: `#buyBoxForm button`,
 }
 
-export const TITLES = {
-  HEADER: `Similar Items You May Like!`,
+const TITLES = {
+  BUTTON: `Add to Shopping Bag`,
 }
 
 export class Buy {
   constructor({
     _parentContainerCSS,
-    timeout = CONSTS.DEFAULT.TIMEOUT,
+    timeout = DEFAULT.TIMEOUT,
   }={}) {
     this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;
+    this.TITLES = TITLES;
   }
 
   getContainerElm() {
     return cy.get(this.parentContainerCSS)
-      .find(_css.h1)
+      .find(_css.form)
       .parent();
   }
 
-  getH1value(){
+  getButton(){
     return this.getContainerElm().then(($container)=>{
-      return cy.wrap($container).find(_css.h1).then(($h1)=>{
-        return getText({$elm: $h1});
-      });
+      return cy.wrap($container).find(_css.button);
+    });
+  }
+
+  getButtonTitle(){
+    return this.getButton().then(($button)=>{
+      return getText({$elm: $button, msg: '--- [buy.js] getButtonTitle()'});
     });
   }
 

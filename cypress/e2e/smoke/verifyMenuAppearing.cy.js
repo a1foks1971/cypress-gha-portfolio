@@ -2,7 +2,7 @@
 
 import MenuSteps from "../../steps/menuSteps";
 import {
-  getMenu_checkAllLinksOfMenuByName_Args
+  getArgs_for_checkAllLinksOfMenuByName
 } from "../../util/featureFn/getFeature_Menu";
 
 describe('Verify appearing of product menu under hovering', () => {
@@ -19,12 +19,12 @@ describe('Verify appearing of product menu under hovering', () => {
       const fixtureIndex_Menu_Clothing = 1;
       const fixtureIndex_Menu_Bags = 2;
 
-      return getMenu_checkAllLinksOfMenuByName_Args(menus[fixtureIndex_Menu_Shoes]).then((_argObj)=>{
+      return getArgs_for_checkAllLinksOfMenuByName(menus[fixtureIndex_Menu_Shoes]).then((_argObj)=>{
         menu_Shoes = _argObj;
-        return getMenu_checkAllLinksOfMenuByName_Args(menus[fixtureIndex_Menu_Clothing]);
+        return getArgs_for_checkAllLinksOfMenuByName(menus[fixtureIndex_Menu_Clothing]);
       }).then((_argObj)=>{
         menu_Clothing = _argObj;
-        return getMenu_checkAllLinksOfMenuByName_Args(menus[fixtureIndex_Menu_Bags]);
+        return getArgs_for_checkAllLinksOfMenuByName(menus[fixtureIndex_Menu_Bags]);
       }).then((_argObj)=>{
         menu_Bags = _argObj;
       });

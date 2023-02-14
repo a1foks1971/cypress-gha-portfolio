@@ -4,11 +4,11 @@ import MenuSteps from "../../steps/menuSteps";
 import SectionSteps from "../../steps/sectionSteps";
 import BreadCrumbsSteps from "../../steps/breadcrumbsSteps";
 import {
-  getProduct_verifyMenu_Args,
-  getProduct_verifyAllBreadCrumbsTitles_Args,
+  getArgs_for_verifyMenu,
+  getArgs_for_verifyAllBreadCrumbsTitles,
 } from "../../util/featureFn/getFeature_Product";
 import {
-  getSection_verifySection_Args
+  getArgs_for_verifySection
 } from "../../util/featureFn/getFeature_Section";
 
 describe('Verify opening a product page', () => {
@@ -31,12 +31,12 @@ describe('Verify opening a product page', () => {
       const index_Shoes_Womens_Sneakers = 0;
       const index_Clothing_Mens_Sweaters = 1;
 
-      return getProduct_verifyMenu_Args(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
+      return getArgs_for_verifyMenu(products[index_Shoes_Womens_Sneakers]).then((_argObj)=>{
         menu_Shoes_Womens_Sneakers = _argObj;
-        return getProduct_verifyMenu_Args(products[index_Clothing_Mens_Sweaters]);
+        return getArgs_for_verifyMenu(products[index_Clothing_Mens_Sweaters]);
       }).then((_argObj)=>{
         menu_Clothing_Mens_Sweaters = _argObj;
-        return getProduct_verifyAllBreadCrumbsTitles_Args(products[index_Shoes_Womens_Sneakers]);
+        return getArgs_for_verifyAllBreadCrumbsTitles(products[index_Shoes_Womens_Sneakers]);
       }).then((_argObj)=>{
         expected_breadcrumbs_OF_menu_Shoes_Womens_Sneakers = _argObj;
       });
@@ -50,18 +50,18 @@ describe('Verify opening a product page', () => {
       const fixtureIndex_Price = 3;
       const fixtureIndex_Color = 4;
 
-      return getSection_verifySection_Args(sections[fixtureIndex_Womens_Size]).then((_argObj)=>{
+      return getArgs_for_verifySection(sections[fixtureIndex_Womens_Size]).then((_argObj)=>{
         section_Womens_Size = _argObj;
-        return getSection_verifySection_Args(sections[fixtureIndex_Womens_Width]);
+        return getArgs_for_verifySection(sections[fixtureIndex_Womens_Width]);
       }).then((_argObj)=>{
         section_Womens_Width = _argObj;
-        return getSection_verifySection_Args(sections[fixtureIndex_Brand_Naot]);
+        return getArgs_for_verifySection(sections[fixtureIndex_Brand_Naot]);
       }).then((_argObj)=>{
         section_Brand_Naot = _argObj;
-        return getSection_verifySection_Args(sections[fixtureIndex_Price]);
+        return getArgs_for_verifySection(sections[fixtureIndex_Price]);
       }).then((_argObj)=>{
         section_Price_Index_ = _argObj;
-        return getSection_verifySection_Args(sections[fixtureIndex_Color]);
+        return getArgs_for_verifySection(sections[fixtureIndex_Color]);
       }).then((_argObj)=>{
         section_Color_Index_ = _argObj;
       });
