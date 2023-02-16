@@ -39,6 +39,7 @@ export const FIXTURE_PROPERTIES = {
 export const SHOULD_BE = {
   VISIBLE: 'be.visible',
   MATCH: 'match',
+  EQUAL: 'eq',
 }
 export const SHOULD_HAVE = {
   ATTR: 'have.attr',
