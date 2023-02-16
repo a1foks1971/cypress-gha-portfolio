@@ -39,7 +39,7 @@ class HeaderSteps extends BaseStep {
       if (!handleError.beforeClick) return Promise.resolve();
       return ignoreUncaughtException_All();
     }).then(()=>{
-      return this.Top.getChatLinkValue().then((_href)=>{
+      return this.Top.getChatLinkHref().then((_href)=>{
         console.log('_href', _href);
         return cy.visit(_href);
       });

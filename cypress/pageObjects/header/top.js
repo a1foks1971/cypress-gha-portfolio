@@ -42,7 +42,7 @@ export class Top {
     return cy.get(ParentContainerCSS);
   }
 
-  getChatLinkValue() {
+  getChatLinkHref() {
     return cy.xpath(_xpath.chatLink_full).parent().then(($elm)=>{
       console.log("=======linkElm", $elm);
       return getAttribute({
