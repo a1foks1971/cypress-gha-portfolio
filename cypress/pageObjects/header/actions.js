@@ -38,7 +38,7 @@ export class Actions {
   }
 
   getContainerElm() {
-    console.log(`-- [actions.js] getContainerElm()`)
+    // cy.log(`-- getContainerElm        [actions.js]`)
     const ParentContainerCSS = this.parentContainerCSS;
     return cy.get(ParentContainerCSS, {timeout: this.timeout})
       .find(_css.login, {timeout: this.timeout})
@@ -46,11 +46,8 @@ export class Actions {
   }
 
   getLoginButton() {
-    console.log(`- [actions.js] getLoginButton()`)
-    return this.getContainerElm().then(($container)=>{
-      return cy.wrap($container)
-        .find(_css.login, {timeout: this.timeout});
-    })
+    // cy.log(`- getLoginButton          [actions.js]`)
+    return this.getContainerElm().find(_css.login, {timeout: this.timeout});
   }
 
   clickLogin({
@@ -59,10 +56,8 @@ export class Actions {
       beforeClick: true,
     }
   } = {}) {
-    console.log(`[actions.js] clickLogin()`)
-    return this.getLoginButton().then(($btn)=>{
-      return cy.wrap($btn).click(clickOpt);
-    })
+    // cy.log(`clickMenuOption_Login     [actions.js]`)
+    this.getLoginButton().click(clickOpt);
   }
 
   hoverLogin({
@@ -71,10 +66,8 @@ export class Actions {
       beforeClick: true,
     }
   } = {}) {
-    console.log(`[actions.js] hoverLogin()`)
-    return this.getLoginButton().then(($btn)=>{
-      return cy.wrap($btn).realHover();
-    })
+    // cy.log(`hoverLogin                [actions.js]`)
+    this.getLoginButton().realHover();
   }
 
   clickMenuOption_Login({
@@ -83,13 +76,11 @@ export class Actions {
       beforeClick: true,
     }
   } = {}) {
-    console.log(`[actions.js] clickMenuOption_Login()`)
-    return this.getContainerElm().then(($container)=>{
-      return cy.wrap($container)
-        .find(_css.dropdownMenu.container, {timeout: this.timeout})
-        .find(_css.dropdownMenu.loginLink, {timeout: this.timeout})
-        .click(clickOpt)
-    });
+    // cy.log(`clickMenuOption_Login     [actions.js]`)
+    this.getContainerElm()
+      .find(_css.dropdownMenu.container, {timeout: this.timeout})
+      .find(_css.dropdownMenu.loginLink, {timeout: this.timeout})
+      .click(clickOpt)
   }
 
   clickMenuOption_Logout({
@@ -98,13 +89,11 @@ export class Actions {
       beforeClick: true,
     }
   } = {}) {
-    console.log(`[actions.js] clickMenuOption_Logout()`)
-    return this.getContainerElm().then(($container)=>{
-      return cy.wrap($container)
-        .find(_css.dropdownMenu.container, {timeout: this.timeout})
-        .find(_css.dropdownMenu.logoutLink, {timeout: this.timeout})
-        .click(clickOpt)
-    });
+    // cy.log(`clickMenuOption_Logout    [actions.js]`)
+    this.getContainerElm()
+      .find(_css.dropdownMenu.container, {timeout: this.timeout})
+      .find(_css.dropdownMenu.logoutLink, {timeout: this.timeout})
+      .click(clickOpt)
   }
 
   getGreetingTitleElm_Fn(){
@@ -118,5 +107,86 @@ export class Actions {
       return getText({$elm: $title});
     })
   }
+  // getContainerElm() {
+  //   console.log(`-- [actions.js] getContainerElm()`)
+  //   const ParentContainerCSS = this.parentContainerCSS;
+  //   return cy.get(ParentContainerCSS, {timeout: this.timeout})
+  //     .find(_css.login, {timeout: this.timeout})
+  //     .parent();
+  // }
+
+  // getLoginButton() {
+  //   console.log(`- [actions.js] getLoginButton()`)
+  //   return this.getContainerElm().then(($container)=>{
+  //     return cy.wrap($container)
+  //       .find(_css.login, {timeout: this.timeout});
+  //   })
+  // }
+
+  // clickLogin({
+  //   clickOpt = undefined,
+  //   handleError = {
+  //     beforeClick: true,
+  //   }
+  // } = {}) {
+  //   console.log(`[actions.js] clickLogin()`)
+  //   return this.getLoginButton().then(($btn)=>{
+  //     return cy.wrap($btn).click(clickOpt);
+  //   })
+  // }
+
+  // hoverLogin({
+  //   clickOpt = undefined,
+  //   handleError = {
+  //     beforeClick: true,
+  //   }
+  // } = {}) {
+  //   console.log(`[actions.js] hoverLogin()`)
+  //   return this.getLoginButton().then(($btn)=>{
+  //     return cy.wrap($btn).realHover();
+  //   })
+  // }
+
+  // clickMenuOption_Login({
+  //   clickOpt = undefined,
+  //   handleError = {
+  //     beforeClick: true,
+  //   }
+  // } = {}) {
+  //   console.log(`[actions.js] clickMenuOption_Login()`)
+  //   return this.getContainerElm().then(($container)=>{
+  //     return cy.wrap($container)
+  //       .find(_css.dropdownMenu.container, {timeout: this.timeout})
+  //       .find(_css.dropdownMenu.loginLink, {timeout: this.timeout})
+  //       .click(clickOpt)
+  //   });
+  // }
+
+  // clickMenuOption_Logout({
+  //   clickOpt = undefined,
+  //   handleError = {
+  //     beforeClick: true,
+  //   }
+  // } = {}) {
+  //   console.log(`[actions.js] clickMenuOption_Logout()`)
+  //   return this.getContainerElm().then(($container)=>{
+  //     return cy.wrap($container)
+  //       .find(_css.dropdownMenu.container, {timeout: this.timeout})
+  //       .find(_css.dropdownMenu.logoutLink, {timeout: this.timeout})
+  //       .click(clickOpt)
+  //   });
+  // }
+
+  // getGreetingTitleElm_Fn(){
+  //   return () => cy.xpath(_xpath.greetingTitle)
+  // }
+
+  // getGreetingTitleText(){
+  //   return this.getGreetingTitleElm_Fn()()
+  //   .should(BE.EXIST)
+  //   .then(($title)=>{
+  //     return getText({$elm: $title});
+  //   })
+  // }
 
 }

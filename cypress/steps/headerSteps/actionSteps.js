@@ -18,36 +18,27 @@ class ActionSteps extends HeaderSteps {
     userName,
     skipVerifying = false,
   } = {}){
-    console.log(`[actionSteps.js] login()`)
-    return this.Header.Actions.hoverLogin().then(()=>{
-      return this.Header.Actions.clickMenuOption_Login();
-    }).then(()=>{
-      return LoginPage.login({
-        email: email,
-        password: password,
-      })
-    }).then(()=>{
-      if (skipVerifying) return Promise.resolve();
-      return this.Header.Actions.hoverLogin().then(()=>{
-        return this.Header.Actions.getGreetingTitleText();
-      }).then((actualGreetingTitle)=>{
-        return expect(actualGreetingTitle).to.contains(userName);
-      });
+    this.Header.Actions.hoverLogin();
+    this.Header.Actions.clickMenuOption_Login();
+    LoginPage.login({
+      email: email,
+      password: password,
+    })
+    if (skipVerifying) return Promise.resolve();
+    this.Header.Actions.hoverLogin();
+    this.Header.Actions.getGreetingTitleText().then((actualGreetingTitle)=>{
+      expect(actualGreetingTitle).to.contains(userName);
     });
   }
 
   logout({
     skipVerifying = false,
   } = {}){
-    console.log(`[actionSteps.js] logout()`)
-    return this.Header.Actions.hoverLogin().then(()=>{
-      return this.Header.Actions.clickMenuOption_Logout();
-    }).then(()=>{
-      return this.Header.Actions.hoverLogin();
-    }).then(()=>{
-      return this.Header.Actions.getGreetingTitleElm_Fn()()
+    this.Header.Actions.hoverLogin()
+    this.Header.Actions.clickMenuOption_Logout();
+    this.Header.Actions.hoverLogin();
+    this.Header.Actions.getGreetingTitleElm_Fn()()
       .should(BE.NOT.EXIST);
-    });
   }
 
 }
