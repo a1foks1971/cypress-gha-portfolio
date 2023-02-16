@@ -40,6 +40,10 @@ export const SHOULD_BE = {
   VISIBLE: 'be.visible',
   MATCH: 'match',
   EQUAL: 'eq',
+  EXIST: 'exist',
+  NOT: {
+    EXIST: 'not.exist'
+  },
 }
 export const SHOULD_HAVE = {
   ATTR: 'have.attr',

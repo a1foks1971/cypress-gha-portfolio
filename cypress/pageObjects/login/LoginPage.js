@@ -4,9 +4,10 @@ import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
 
 const _css = {
-    userName: '#login-form-username',
-    pswInp: '#login-form-password',
-    submitBtn: '#login-form-submit',
+    container: `[name="signIn"]`,
+    email: 'input#ap_email',
+    pswInp: 'input#ap_password',
+    submitBtn: '#signInSubmit',
 }
 
 export class LoginPage extends Page {
@@ -20,19 +21,18 @@ export class LoginPage extends Page {
     * Login
     */
     login({
-        url = this.env,
-        userName,
+        email,
         password,
         dbg = CONSTS.DEBUG_MODE,
         visitTimeout = this.visitTimeout,
     } = {}) {
-        if (dbg) console.log("url", url);
-        if (dbg) console.log("userName", userName);
-        if (dbg) console.log("upasswordrl", password);
-        cy.visit(url, {timeout: visitTimeout});
-        cy.get(_css.userName).type(userName);
-        cy.get(_css.pswInp).type(password);
-        cy.get(_css.submitBtn).click();
+        if (dbg) console.log("email", email);
+        if (dbg) console.log("password", password);
+        return cy.get(_css.email).type(email).then(()=>{
+            return cy.get(_css.pswInp).type(password);
+        }).then(()=>{
+            return cy.get(_css.submitBtn).click();
+        });
     }
 }
 

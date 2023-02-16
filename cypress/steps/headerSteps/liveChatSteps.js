@@ -1,21 +1,19 @@
 "use strict";
 
-import { BaseStep } from "./baseStep";
-import { Top } from "../pageObjects/header/top";
-import { cy_wait, promiseChaining } from "../util/functions";
-import { ignoreUncaughtException_All } from "../util/handleError";
-import { LiveChatUnReg } from "../pageObjects/header/liveChatUnreg";
+import { HeaderSteps } from "./headerSteps";
+import { cy_wait, promiseChaining } from "../../util/functions";
+import { ignoreUncaughtException_All } from "../../util/handleError";
+import { LiveChatUnReg } from "../../pageObjects/header/liveChatUnreg";
 import {
   SHOULD_BE as BE,
   HTML as HTML,
   REG
-} from "../util/consts";
+} from "../../util/consts";
 
-class HeaderSteps extends BaseStep {
+class LiveChatSteps extends HeaderSteps {
 
   constructor(){
     super();
-    this.Top = new Top({_parentContainerCSS: `header`});
     this.LiveChatUnReg = new LiveChatUnReg();
   }
 
@@ -39,7 +37,7 @@ class HeaderSteps extends BaseStep {
       if (!handleError.beforeClick) return Promise.resolve();
       return ignoreUncaughtException_All();
     }).then(()=>{
-      return this.Top.getChatLinkHref().then((_href)=>{
+      return this.Header.Top.getChatLinkHref().then((_href)=>{
         console.log('_href', _href);
         return cy.visit(_href);
       });
@@ -63,5 +61,5 @@ class HeaderSteps extends BaseStep {
 
 }
 
-export default new HeaderSteps();
+export default new LiveChatSteps();
 

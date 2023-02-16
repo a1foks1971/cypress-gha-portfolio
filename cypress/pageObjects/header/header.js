@@ -4,6 +4,7 @@ import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
 import {console_log, getAttribute} from "../../util/functions";
 import { Actions } from "./actions";
+import { Top } from "./top";
 
 const _css = {
   picture: `picture`,
@@ -25,6 +26,7 @@ export class Header {
   }={}) {
     this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;
+    this.Top = new Top({_parentContainerCSS: `header`});
     this.Actions = new Actions({
       _parentContainerCSS: this.parentContainerCSS,
       timeout: this.timeout

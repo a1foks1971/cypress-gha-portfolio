@@ -1,6 +1,6 @@
 "use strict";
 
-import HeaderSteps from "../../steps/headerSteps";
+import LiveChatSteps from "../../steps/headerSteps/liveChatSteps";
 
 describe('Verify the chat', () => {
 
@@ -9,7 +9,7 @@ describe('Verify the chat', () => {
   })
 
   it(`checks the chat for an unsigned in user`, () => {
-    HeaderSteps.verifyChatOpenningForUnregisteredUser();
+    LiveChatSteps.verifyChatOpenningForUnregisteredUser();
   })
 
 
