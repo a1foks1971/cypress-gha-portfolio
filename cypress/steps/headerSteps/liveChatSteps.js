@@ -4,6 +4,7 @@ import { HeaderSteps } from "./headerSteps";
 import { cy_wait, promiseChaining } from "../../util/functions";
 import { ignoreUncaughtException_All } from "../../util/handleError";
 import { LiveChatUnReg } from "../../pageObjects/header/liveChatUnreg";
+import { LiveChatReg } from "../../pageObjects/header/liveChatReg";
 import {
   SHOULD_BE as BE,
   HTML as HTML,
@@ -15,16 +16,24 @@ class LiveChatSteps extends HeaderSteps {
   constructor(){
     super();
     this.LiveChatUnReg = new LiveChatUnReg();
+    this.LiveChatReg = new LiveChatReg();
   }
 
   verifyChatOpenningForUnregisteredUser(){
-    return cy.url().then((savedUrl)=>{
+    cy.url().then((savedUrl)=>{
       console.log("savedUrl", savedUrl);
-      return this.openChat().then(()=>{
-        return this.verifyChat();
-      }).then(()=>{
-        return this.closeChat(savedUrl);
-      });
+      this.openChat();
+      this.verifyChat_Unreg();
+      this.closeChat(savedUrl);
+    });
+  }
+
+  verifyChatOpenningForAleadyRegisteredUser({registered6pmUserName}={}){
+    cy.url().then((savedUrl)=>{
+      console.log("savedUrl", savedUrl);
+      this.openChat();
+      this.verifyChat_Reg({registered6pmUserName: registered6pmUserName});
+      this.closeChat(savedUrl);
     });
   }
 
@@ -33,33 +42,31 @@ class LiveChatSteps extends HeaderSteps {
       beforeClick: true,
     }
   } = {}){
-    return Promise.resolve().then(()=>{
-      if (!handleError.beforeClick) return Promise.resolve();
-      return ignoreUncaughtException_All();
-    }).then(()=>{
-      return this.Header.Top.getChatLinkHref().then((_href)=>{
-        console.log('_href', _href);
-        return cy.visit(_href);
-      });
-    })
+    if (!handleError.beforeClick) return Promise.resolve();
+    ignoreUncaughtException_All();
+    this.Header.Top.getChatLinkHref().then((_href)=>{
+      console.log('_href', _href);
+      cy.visit(_href);
+    });
   }
 
-  verifyChat(){
-    return this.LiveChatUnReg.getWarningMessage().then((_msg)=>{
+  verifyChat_Unreg(){
+    this.LiveChatUnReg.getWarningMessage().then((_msg)=>{
       console.log("_msg", _msg);
-      return expect(_msg).to.be.equal(this.LiveChatUnReg.EXPECTED.WARNING);
-    }).then(()=>{
-      return cy.url().should(BE.EQUAL, this.LiveChatUnReg.EXPECTED.URL)
-    })
+      expect(_msg).to.be.equal(this.LiveChatUnReg.EXPECTED.WARNING);
+      cy.url().should(BE.EQUAL, this.LiveChatUnReg.EXPECTED.URL)
+    });
+  }
+
+  verifyChat_Reg({registered6pmUserName}={}){
+    this.LiveChatReg.getHelpElm().should(BE.VISIBLE);
   }
 
   closeChat(savedUrl){
-    return cy.visit(savedUrl).then(()=>{
-      return cy.url().should(BE.EQUAL, savedUrl);
-    })
+    cy.visit(savedUrl)
+    cy.url().should(BE.EQUAL, savedUrl);
   }
 
 }
 
 export default new LiveChatSteps();
-
