@@ -4,12 +4,11 @@ import * as CONSTS from "../../util/consts";
 import {getText} from "../../util/functions";
 
 const _css = {
-  h1: 'h1',
-  body: `#alsoLike`,
+  h1: 'h3',
 }
 
-export const TITLES = {
-  HEADER: `Similar Items You May Like!`,
+const TITLES = {
+  HEADER: `Product Information`,
 }
 
 export class Presentation {
@@ -19,6 +18,7 @@ export class Presentation {
   }={}) {
     this.timeout = timeout;
     this.parentContainerCSS = _parentContainerCSS;
+    this.TITLES = TITLES;
   }
 
   getContainerElm() {

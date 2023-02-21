@@ -13,12 +13,14 @@ class ProductSteps extends BaseStep {
       return this.verifyPriceForm();
     }).then(()=>{
       return this.verifyBuyForm();
-    // }).then(()=>{
-    //   return this.verifyPresentationForm();
-    // }).then(()=>{
-    //   return ProductPage.Pictures.clickOnPictureWithIndex({index: 0})
-    // }).then(()=>{
-    //   return this.verifyZoomPicturePage();
+    }).then(()=>{
+      return this.verifyPresentationForm();
+    }).then(()=>{
+      return ProductPage.Pictures.clickOnPictureWithIndex({index: 0})
+    }).then(()=>{
+      return this.verifyZoomPicturePage();
+    }).then(()=>{
+      return this.verifyShoppingBag();
     });
   }
 
@@ -59,27 +61,38 @@ class ProductSteps extends BaseStep {
   }
 
   verifyPresentationForm(){
-    //TODO
-    return Promise.resolve();
+    return ProductPage.Presentation.getH1value().then((_actualHeaderTitle)=>{
+      return expect(_actualHeaderTitle).to.be.equal(ProductPage.Presentation.TITLES.HEADER);
+    });
   }
 
   verifyZoomPicturePage(){
-    //TODO
     return ZoomPicturePage.getNumberOfThumbnails().then((thumbnailsNumber)=>{
       expect(thumbnailsNumber).to.be.greaterThan(0);
       let _index = Cypress._.random(thumbnailsNumber - 1);
       console.log(`-- verifyZoomPicturePage() Random thumbnail index:`, _index);
-      return ZoomPicturePage.openThumbnaileWithIndex(_index).then(()=>{
+      return ZoomPicturePage.openThumbnaileWithIndex({index: _index}).then(()=>{
         return cy_wait();
       }).then(()=>{
         return ZoomPicturePage.getAltAttrOfThumbnaileWithIndex({index: _index});
-      }).then((thumbAlt)=>{
-        console.log(`-- verifyZoomPicturePage() thumbAlt`, thumbAlt);
-        return ZoomPicturePage.getAltAttrOfMainPicture();
-      }).then((mainAlt)=>{
-        console.log(`-- verifyZoomPicturePage() mainAlt`, mainAlt);
+      }).then((_thumbAlt)=>{
+        console.log(`-- verifyZoomPicturePage() thumbAlt`, _thumbAlt);
+        let thumbAlt = _thumbAlt.split(' - ')
+        console.log(`-- View Type`, thumbAlt);
+        return ZoomPicturePage.getAltAttrOfMainPicture().then((mainAlt)=>{
+          console.log(`-- verifyZoomPicturePage() mainAlt`, mainAlt);
+          return expect(mainAlt).contains(thumbAlt[thumbAlt.length - 1]);
+        });
+      }).then(()=>{
+        return ZoomPicturePage.closeZoom();
+      });
+    });
 
-      })
+  }
+
+  verifyShoppingBag(){
+    return ProductPage.Buy.setOptions().then(()=>{
+      return ProductPage.Buy.clickAddToBasket();
     });
   }
 

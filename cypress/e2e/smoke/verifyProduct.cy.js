@@ -28,7 +28,7 @@ describe('Verify a product', () => {
     cy.visit('https://www.6pm.com/');
   })
 
-  it(`checks the "Shoes" menu is aapeared after hovering`, () => {
+  it(`checks the "Shoes" menu is appeared after hovering`, () => {
     return MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
       return cy_wait();
     }).then(()=>{

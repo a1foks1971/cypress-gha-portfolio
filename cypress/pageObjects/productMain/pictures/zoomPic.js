@@ -5,7 +5,7 @@ import {
   SHOULD_HAVE as HAVE,
   SHOULD_BE as BE,
   HTML as HTML,
-  REG
+  DEFAULT
 } from "../../../util/consts";
 import {getAttribute} from "../../../util/functions";
 
@@ -26,11 +26,12 @@ const _css = {
 
 export class ZoomPic extends Page {
   constructor(
-    _parentContainerCSS = cContainer
+    _parentContainerCSS = cContainer,
+    timeout = DEFAULT.TIMEOUT,
     ) {
       super();
       this.parentContainerCSS = _parentContainerCSS;
-      // this.timeout = 16000;
+      this.timeout = timeout;
   }
 
   getContainerElm() {
@@ -102,6 +103,10 @@ export class ZoomPic extends Page {
           });
       });
     });
+  }
+
+  closeZoom(){
+    return cy.get(_css.closeButton).click();
   }
 
 }
