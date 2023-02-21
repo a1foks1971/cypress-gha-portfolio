@@ -3,6 +3,7 @@
 import MenuSteps from "../../steps/menuSteps";
 import ProductSteps from "../../steps/productSteps";
 import SearchSteps from "../../steps/searchSteps";
+import ActionSteps from "../../steps/headerSteps/actionSteps";
 import {
   getArgs_for_verifyMenu,
 } from "../../util/featureFn/getFeature_Product";
@@ -21,11 +22,16 @@ describe('Verify a product', () => {
         menu_Shoes_Womens_Sneakers = _argObj;
       });
     });
-
+    cy.fixture('users').as('fixUsers');
   })
 
-  beforeEach(()=>{
+  beforeEach(function() {
     cy.visit('https://www.6pm.com/');
+    ActionSteps.login({
+      email: this.fixUsers.email,
+      password: this.fixUsers.pwd,
+      userName: this.fixUsers.username,
+    });
   })
 
   it(`checks the "Shoes" menu is appeared after hovering`, () => {

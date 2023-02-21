@@ -4,7 +4,7 @@ import {
   SHOULD_BE as BE,
   DEFAULT
 } from "../../util/consts";
-import {getText, promiseChaining} from "../../util/functions";
+import {cy_wait, getText, promiseChaining} from "../../util/functions";
 
 const _css = {
   form: `#buyBoxForm`,
@@ -61,19 +61,15 @@ export class Buy {
     return this.getContainerElm().then(($container)=>{
       return cy.wrap($container).find(_css.fieldset.container).then(($containerS)=>{
         return promiseChaining(_.times($containerS.length), index => {
-          console.log("$containers", $containerS);
           let $cont = $containerS[index];
           let selLength;
-          console.log("$cont", $cont);
           return cy.wrap($cont).find(_css.fieldset.options.selected).should(($sel)=>{
             selLength = $sel.length;
             return expect(selLength ).be.gte(0);
           }).then(()=>{
-            console.log("selLength", selLength);
             if (selLength > 0) return Promise.resolve();
             return cy.wrap($cont)
             .find(_css.fieldset.options.input+`:not([aria-label*="${TITLES.IS_OUT_OF_STOCK}"])`).then(($input)=>{
-              console.log("$input", $input);
               return cy.wrap($input).first()
               .click(clickOpt);
             });
@@ -84,7 +80,24 @@ export class Buy {
   }
 
   clickAddToBasket(){
-    return this.getButton().click();
+    console.log("clickAddToBasket");
+    cy.log("clickAddToBasket");
+
+  //   return Promise.resolve().then(()=>{
+  //     if (!handleError.beforeClick) return Promise.resolve();
+  //     return ignoreUncaughtException_All();
+  //   }).then(()=>{
+  // cy.window().then((win) => {
+  //     win.eval(`document.querySelector('[data-track-value="Add-To-Cart"]').click()`);
+  //   });
+  // cy.wait(5 * 1000)
+    return this.getButton().parent().parent().click()
+    // return this.getButton().parent().parent().then(($elm)=>{
+    //   return cy_wait({ timeout: 2 * 1000, }).then(()=>{
+    //     return $elm.get(0).click();
+    //     // return cy.wrap($elm).realClick();
+    //   })
+    // });
   }
 
 }

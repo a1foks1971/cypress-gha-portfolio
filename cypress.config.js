@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
 module.exports = defineConfig({
+  projectId: 'psrq74',
   reporter: '../node_modules/cypress-mochawesome-reporter',
   video: false,
   viewportWidth: 1920,
