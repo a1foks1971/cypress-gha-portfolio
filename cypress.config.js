@@ -4,7 +4,7 @@ const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/li
 module.exports = defineConfig({
   projectId: 'psrq74',
   reporter: '../node_modules/cypress-mochawesome-reporter',
-  video: false,
+  video: true,
   viewportWidth: 1920,
   viewportHeight: 1080,
   reporterOptions: {

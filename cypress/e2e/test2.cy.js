@@ -2,7 +2,7 @@
 
 import MenuPage from "../pageObjects/header/menu";
 
-describe('Verify appearing of product menu uner hovering', () => {
+describe('Verify appearing of product menu under hovering', () => {
   beforeEach(()=>{
     // cy.visit(Cypress.env('run_env'));
     cy.visit('https://www.6pm.com/');
