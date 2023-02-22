@@ -15,6 +15,16 @@ class SearchSteps extends BaseStep {
     return SearchPage;
   }
 
+  selectFilterByName({optionName}){
+    return SearchPage.Body.selectFilterByName({optionName: optionName});
+  }
+
+  verifyFilterCurrentOption({expectedOption}){
+    return SearchPage.Body.verifyFilterCurrentOption({expectedOption: expectedOption});
+  }
+
+
+
 }
 
 export default new SearchSteps();
