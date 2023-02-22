@@ -11,6 +11,10 @@ class SearchSteps extends BaseStep {
     return SearchPage.AricleS.openArticleWithIndex({indexFromZero: articleIndex});
   }
 
+  getSearchPage(){
+    return SearchPage;
+  }
+
 }
 
 export default new SearchSteps();
