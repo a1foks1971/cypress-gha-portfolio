@@ -15,6 +15,10 @@ class SearchSteps extends BaseStep {
     return SearchPage;
   }
 
+  getFilterOptions(){
+    return SearchPage.Body.getFilterOptions();
+  }
+
   selectFilterByName({optionName}){
     return SearchPage.Body.selectFilterByName({optionName: optionName});
   }

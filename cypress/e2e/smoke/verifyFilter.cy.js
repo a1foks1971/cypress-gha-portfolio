@@ -16,7 +16,6 @@ describe('Verify appearing of product menu under hovering', () => {
         menu_Shoes_Womens_Sneakers = _argObj;
       });
     });
-    cy.fixture('users').as('fixUsers');
   })
 
   beforeEach(function() {
@@ -26,8 +25,7 @@ describe('Verify appearing of product menu under hovering', () => {
   it(`checks the "Shoes" menu is appeared after hovering`, () => {
     // MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers).then(()=>{
     MenuSteps.verifyMenu(menu_Shoes_Womens_Sneakers);
-    SearchSteps.getSearchPage().Body.getFilterOptions().then((optS)=>{
-      console.log(`optS`, optS);
+    SearchSteps.getFilterOptions().then((optS)=>{
       const index = Cypress._.random(0, optS.length - 1);
       const newOption = optS[index];
       SearchSteps.selectFilterByName({optionName: newOption});

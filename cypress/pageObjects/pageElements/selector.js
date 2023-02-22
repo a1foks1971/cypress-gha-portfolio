@@ -23,12 +23,12 @@ export class SelectorPgElm {
 
   getElm_Fn(){
     let self = this;
-    return function() {return cy.get(self.container);}
+    return function() {return cy.get(self.container, {timeout: self.timeout});}
   }
 
   getAllOptions(){
     return this.getElm_Fn()()
-    .find(this.options)
+    .find(this.options, {timeout: this.timeout})
     .then(($options) => {
       return Cypress._.map(
         $options,
@@ -41,12 +41,12 @@ export class SelectorPgElm {
   }
 
   selectByName({optionName}={}){
-    return this.getElm_Fn()().select(optionName, { force: true });
+    return this.getElm_Fn()().select(optionName, { force: true, timeout: this.timeout} );
   }
 
   verifyCurrentTextValue({expectedText}={}){
     return this.getElm_Fn()()
-    .find(this.selectedOption)
+    .find(this.selectedOption, {timeout: this.timeout})
     .should(
       HAVE.TEXT,
       expectedText,
