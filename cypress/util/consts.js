@@ -52,3 +52,11 @@ export const REG = {
   ONLY_DIGITALS: /^[0-9]*$/,
   THE_FIRST_IS_DIGITAL: /^[0-9]/,
 }
+
+export const REQUEST = {
+  METHOD: {
+    GET: `GET`,
+    POST: `POST`,
+    HEAD: `HEAD`,
+  },
+}

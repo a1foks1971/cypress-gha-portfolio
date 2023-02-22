@@ -50,3 +50,13 @@ export function getText({
   });
 }
 
+export function getLinkResponse({
+  url: url,
+  METHOD = 'GET',
+}={}){
+  console.log("verifyLinkResponse() strLink:", url);
+  return cy.request(METHOD, url).then((response)=>{
+    console.log(" - response:", response);
+    return Promise.resolve(response);
+  })
+}
