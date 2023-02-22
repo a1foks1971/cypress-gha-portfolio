@@ -30,8 +30,8 @@ describe('Verify appearing of product menu under hovering', () => {
       console.log(`optS`, optS);
       const index = Cypress._.random(0, optS.length - 1);
       const newOption = optS[index];
-      SearchSteps.getSearchPage().Body.selectFilterByName(newOption);
-      SearchSteps.getSearchPage().Body.verifyFilterCurrentOption(newOption);
+      SearchSteps.getSearchPage().Body.selectFilterByName({optionName: newOption});
+      SearchSteps.getSearchPage().Body.verifyFilterCurrentOption({expectedOption: newOption});
     });
     // })
   })

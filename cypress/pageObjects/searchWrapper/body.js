@@ -9,12 +9,13 @@ import {
   REG
 } from "../../util/consts";
 import {console_log, getText} from "../../util/functions";
+import { SelectorPgElm } from "../pageElements/selector";
 
-const cContainer = '#searchPage';
+const cContainer = '#main';
 const _css = {
   container: cContainer,
   filterDropdown: {
-    container: `#searchSort`,
+    container: `select#searchSort`,
     options: `option`,
     selectedOption: `option:selected`,
   }
@@ -24,6 +25,11 @@ export class Body {
   constructor({
     timeout = CONSTS.DEFAULT.TIMEOUT,
   }={}) {
+    this.FilterSelector = new SelectorPgElm({
+      container: _css.filterDropdown.container,
+      options: _css.filterDropdown.options,
+      selectedOption: _css.filterDropdown.selectedOption,
+    })
     this.timeout = timeout;
   }
 
@@ -32,31 +38,15 @@ export class Body {
   }
 
   getFilterOptions(){
-    return this.filterDropdownElm_Fn()()
-    .find(_css.filterDropdown.options)
-    .then(($options) => {
-      // get the text of each option
-      return Cypress._.map(
-        $options,
-        ($option) => $option.innerText,
-      )
-    }).then((txtOptions)=>{
-      cy.log(txtOptions);
-      return Promise.resolve(txtOptions);
-    });
+    return this.FilterSelector.getAllOptions();
   }
 
-  selectFilterByName(optionName){
-    return this.filterDropdownElm_Fn()().select(optionName, { force: true });
+  selectFilterByName({optionName}){
+    return this.FilterSelector.selectByName({optionName: optionName});
   }
 
-  verifyFilterCurrentOption(expectedOption){
-    return this.filterDropdownElm_Fn()()
-    .find(_css.filterDropdown.selectedOption)
-    .should(
-      HAVE.TEXT,
-      expectedOption,
-    )
+  verifyFilterCurrentOption({expectedOption}){
+    return this.FilterSelector.verifyCurrentTextValue({expectedText: expectedOption});
   }
 
 }
