@@ -2,7 +2,7 @@
 
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
-import {console_log, getAttribute} from "../../util/functions";
+import {console_log, getAttribute, isVisibleCSS} from "../../util/functions";
 import { Actions } from "./actions";
 import { Top } from "./top";
 
@@ -36,6 +36,22 @@ export class Header {
   getContainerElm() {
     const ParentContainerCSS = this.parentContainerCSS;
     return cy.get(ParentContainerCSS);
+  }
+
+  isMainHeaderVisible({
+    index = 0,
+  }={}){
+    return isVisibleCSS({_css: this.parentContainerCSS}).then((isMainHeaderVisible)=>{
+      console.log(`isMainHeaderVisible() [cypress/pageObjects/header/header.js]`, isMainHeaderVisible);
+      return Promise.resolve(isMainHeaderVisible);
+    });
+  }
+
+  ensureMainHeaderIsHidden(){
+    return this.isMainHeaderVisible().then((isMainHeaderVisible)=>{
+      console.log(`ensureMainHeaderIsHidden() isMainHeaderVisible:`, isMainHeaderVisible);
+      return expect(isMainHeaderVisible).to.be.false;
+    });
   }
 
 }

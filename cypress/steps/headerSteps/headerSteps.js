@@ -15,9 +15,8 @@ export class HeaderSteps extends BaseStep {
 
   constructor(){
     super();
-    this.Header = new Header({_parentContainerCSS: `header`});
+    this.Header = new Header({_parentContainerCSS: `#root>div>header`});
   }
-
 
 }
 

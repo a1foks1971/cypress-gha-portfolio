@@ -5,8 +5,9 @@ import ProductPage from "../pageObjects/productMain/productMain";
 import ZoomPicturePage from "../pageObjects/productMain/pictures/zoomPic";
 import SectionPage from "../pageObjects/searchWrapper/section/section";
 import { cy_wait } from "../util/functions";
+import { HeaderSteps } from "./headerSteps/headerSteps";
 
-class ProductSteps extends BaseStep {
+class ProductSteps extends HeaderSteps {
 
   verifyProductUI(){
     return this.verifyPictures().then(()=>{
@@ -73,6 +74,8 @@ class ProductSteps extends BaseStep {
       console.log(`-- verifyZoomPicturePage() Random thumbnail index:`, _index);
       return ZoomPicturePage.openThumbnaileWithIndex({index: _index}).then(()=>{
         return cy_wait();
+      }).then(()=>{
+        return this.Header.ensureMainHeaderIsHidden({index: _index});
       }).then(()=>{
         return ZoomPicturePage.getAltAttrOfThumbnaileWithIndex({index: _index});
       }).then((_thumbAlt)=>{
