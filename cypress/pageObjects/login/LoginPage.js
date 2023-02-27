@@ -2,7 +2,12 @@
 
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
-
+import {
+    SHOULD_BE as BE,
+    HTML as HTML,
+    REG
+  } from "../../util/consts";
+  
 const _css = {
     container: `[name="signIn"]`,
     email: 'input#ap_email',
@@ -33,6 +38,11 @@ export class LoginPage extends Page {
         }).then(()=>{
             return cy.get(_css.submitBtn).click();
         });
+    }
+
+    doVisualTesting(){
+        cy.get(_css.email).should(BE.VISIBLE);
+        cy.eyesCheckWindow('LoginPage');
     }
 }
 

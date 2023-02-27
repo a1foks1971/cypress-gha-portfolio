@@ -17,9 +17,11 @@ class ActionSteps extends HeaderSteps {
     password,
     userName,
     skipVerifying = false,
+    doVisualTesting = false,
   } = {}){
     this.Header.Actions.hoverLogin();
     this.Header.Actions.clickMenuOption_Login();
+    if (doVisualTesting) LoginPage.doVisualTesting();
     LoginPage.login({
       email: email,
       password: password,
