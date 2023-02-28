@@ -2,6 +2,11 @@
 
 import _ from 'lodash';
 import * as CONSTS from "../../util/consts";
+import {
+  SHOULD_BE as BE,
+  HTML as HTML,
+  REG
+} from "../../util/consts";
 import {console_log, getAttribute, promiseChaining, getLinkResponse} from "../../util/functions";
 import { Page } from "../Page";
 import { LinkMenu } from "./linkMenu";
@@ -36,6 +41,19 @@ export class Footer extends Page {
       });
     });
   }
+
+  doVisualTesting(){
+    cy.get(_css.container, {timeout: this.timeout}).should(BE.VISIBLE);
+    cy.eyesCheckWindow({
+      tag: 'FooterPage',
+      target: 'region',
+      selector: {
+        type: 'css',
+        selector: _css.container,
+      }
+    });
+  }
+
 
 }
 

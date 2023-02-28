@@ -5,7 +5,10 @@ import { cy_wait, promiseChaining } from "../util/functions";
 import Footer from "../pageObjects/footer/footer";
 
 class FooterSteps extends BaseStep {
-  verifyFooterLinks(){
+  verifyFooterLinks({
+    doVisualTesting = true,
+  }){
+    if (doVisualTesting) Footer.doVisualTesting();
     Footer.verifyLinks();
   }
 

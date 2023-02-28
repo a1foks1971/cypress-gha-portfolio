@@ -34,17 +34,31 @@ describe('Verify appearing of product menu under hovering', () => {
 
   beforeEach(()=>{
     cy.visit('https://www.6pm.com/');
+    cy.eyesOpen({
+      testName: 'Verify appearing of product menu under hovering',
+    });
+  })
+
+  afterEach(function(){
+    cy.eyesClose();
   })
 
   it(`checks the "Shoes" menu is aapeared after hovering`, () => {
+    MenuSteps.doVisualTesting({stepName: 'Verify the header visibility'});
+    // menu_Shoes.doVisualTesting = true;
+    menu_Shoes.stepName = Cypress.currentTest.title;
     MenuSteps.checkAllLinksOfMenuByName(menu_Shoes);
   })
 
   it(`checks the "Clothing" menu is aapeared after hovering`, () => {
+    // menu_Clothing.doVisualTesting = true;
+    menu_Shoes.stepName = Cypress.currentTest.title;
     MenuSteps.checkAllLinksOfMenuByName(menu_Clothing);
   })
 
   it(`checks the "Bags" menu is aapeared after hovering`, () => {
+    // menu_Bags.doVisualTesting = true;
+    menu_Shoes.stepName = Cypress.currentTest.title;
     MenuSteps.checkAllLinksOfMenuByName(menu_Bags);
   })
 

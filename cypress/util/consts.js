@@ -48,6 +48,7 @@ export const SHOULD_BE = {
 export const SHOULD_HAVE = {
   ATTR: 'have.attr',
   TEXT: 'have.text',
+  CSS: 'have.css',
 }
 export const REG = {
   ONLY_DIGITALS: /^[0-9]*$/,

@@ -98,3 +98,23 @@ export function isTrulyVisible({$elm}={}) {
   return Promise.resolve(isTrulyVisible);
 }
 
+export function doVisualTestingOfCssRegion({
+  tag,
+  css_selector,
+  check_visibility_css,
+  timeout = 15*1000,
+  waitCallback = function(_css) {cy.get(_css, {timeout: timeout}).should(CONSTS.SHOULD_BE.VISIBLE);}
+}={}){
+  cy.wrap(waitCallback(check_visibility_css));
+  cy.wait(1*1000);
+  cy.log(`CALL eyesCheckWindow()`, css_selector);
+  cy.eyesCheckWindow({
+    tag: tag,
+    target: 'region',
+    selector: {
+      type: 'css',
+      selector: css_selector,
+    }
+  });
+}
+

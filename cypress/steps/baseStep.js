@@ -1,7 +1,9 @@
 "use strict";
 
 export class BaseStep {
-  constructor () {}
+  constructor () {
+    this.HeaderContainerCSS = `#root>div>header`;
+  }
 
 }
 

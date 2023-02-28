@@ -2,7 +2,10 @@
 
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
-import {console_log} from "../../util/functions";
+import {
+  SHOULD_HAVE as HAVE,
+} from "../../util/consts";
+import {console_log, doVisualTestingOfCssRegion} from "../../util/functions";
 
 const cContainer = 'body>div>div>header>div:nth-of-type(2)';
 const _css = {
@@ -23,16 +26,21 @@ export class Menu extends Page {
 
   checkAllLinksOfMenuByName({
       menuName,
+      stepName,
       dbg = CONSTS.DEBUG_MODE,
       timeout = this.timeout,
+      doVisualTesting = false,
   } = {}) {
-    console.log("checkAllLinksOfMenuByName");
+    cy.log("checkAllLinksOfMenuByName");
+    cy.log('doVisualTesting', doVisualTesting);
     console.log("menuName", menuName);
     return this.verifyVisibilityOfMenuByName({
       menuName: menuName,
       dbg: dbg,
       timeout: timeout,
       expectVisible: false,
+      doVisualTesting: false,
+      stepName: stepName,
     }).then(()=>{
       return this.getMenuByName({
         menuName: menuName,
@@ -47,6 +55,8 @@ export class Menu extends Page {
         dbg: dbg,
         timeout: timeout,
         expectVisible: true,
+        stepName: stepName,
+        doVisualTesting: doVisualTesting,
       });
     });
   }
@@ -90,8 +100,11 @@ export class Menu extends Page {
     dbg = CONSTS.DEBUG_MODE,
     timeout = this.timeout,
     expectVisible = true,
+    doVisualTesting = false,
+    stepName,
     } = {}){
-      console.log("verifyVisibilityOfMenuByName");
+      cy.log("verifyVisibilityOfMenuByName");
+      cy.log('doVisualTesting', doVisualTesting, 'expectVisible', expectVisible);
       return this.getMenuFrameElmOfMenuByName({
       menuName: menuName,
       dbg: dbg,
@@ -102,7 +115,28 @@ export class Menu extends Page {
         return null;
       };
       return cy.wrap($menuFrame)
-        .should(`${ expectVisible ? "" : "not."}be.visible`);
+        .should(`${ expectVisible ? "" : "not."}be.visible`).then(()=>{
+          cy.log('doVisualTesting', doVisualTesting, 'expectVisible', expectVisible);
+          if (!doVisualTesting) return Promise.resolve();
+          if (!expectVisible) return Promise.resolve();
+          return cy.eyesCheckWindow({
+            tag: stepName,
+            target: 'region',
+            element: $menuFrame,
+          })
+          // return this.getCssOfMenuByName({
+          //   menuName: menuName,
+          // }).then((_menuCSS)=>{
+          //   return doVisualTestingOfCssRegion({
+          //     tag: `${stepName}`,
+          //     css_selector: _menuCSS+">div>div",
+          //     check_visibility_css: _menuCSS,
+          //     waitCallback: function(css) {
+          //       cy.get(css).should(HAVE.CSS, 'visibility', 'visible');
+          //     }
+          //   });
+          // });
+        });
     });
   }
 
@@ -121,6 +155,24 @@ export class Menu extends Page {
       const _selector = `${_css.menues}:nth-of-type(${menuIndex + 1}) > div`
       console.log("_selector", _selector);
       return cy.get(_selector, {timeout: timeout});
+    });
+  }
+
+  getCssOfMenuByName({
+    menuName,
+    dbg = CONSTS.DEBUG_MODE,
+    timeout = this.timeout,
+    } = {}){
+      console.log("getMenuFrameElmOfMenuByName()");
+      return this.getIndexOfMenuWithName({menuName: menuName}).then((menuIndex)=>{
+        console.log("menuIndex", menuIndex);
+        if (menuIndex === null) {
+        console.log(`WARNING: Menu "${menuName} is not found"`)
+        return null;
+      };
+      const _selector = `${_css.menues}:nth-of-type(${menuIndex + 1}) > div`
+      console.log("_selector", _selector);
+      return Promise.resolve(_selector);
     });
   }
 

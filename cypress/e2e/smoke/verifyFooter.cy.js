@@ -4,12 +4,20 @@ import FooterSteps from "../../steps/footerSteps";
 
 describe('Verify the footer', () => {
 
-  // beforeEach(()=>{
-  //   cy.visit('https://www.6pm.com/');
-  // })
+  beforeEach(()=>{
+    cy.visit('https://www.6pm.com/');
+    cy.eyesOpen({
+      testName: Cypress.currentTest.title,
+    });
+  })
+
+  afterEach(function(){
+    cy.eyesClose();
+  })
 
   it(`checks links of the footer`, () => {
-    cy.visit('https://www.6pm.com/');
-    FooterSteps.verifyFooterLinks();
+    FooterSteps.verifyFooterLinks({
+      doVisualTesting: true,
+    });
   })
 })

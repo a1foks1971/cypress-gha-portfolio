@@ -2,6 +2,11 @@
 
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
+import {
+  SHOULD_BE as BE,
+  HTML as HTML,
+  REG
+} from "../../util/consts";
 import {console_log, getAttribute, isVisibleCSS} from "../../util/functions";
 import { Actions } from "./actions";
 import { Top } from "./top";
@@ -53,5 +58,18 @@ export class Header {
       return expect(isMainHeaderVisible).to.be.false;
     });
   }
+
+  doVisualTesting({stepName = ''}){
+    cy.get(this.parentContainerCSS, {timeout: this.timeout}).should(BE.VISIBLE);
+    cy.eyesCheckWindow({
+      tag: `${this.constructor.name} ${stepName}`,
+      target: 'region',
+      selector: {
+        type: 'css',
+        selector: this.parentContainerCSS,
+      }
+    });
+  }
+
 
 }
