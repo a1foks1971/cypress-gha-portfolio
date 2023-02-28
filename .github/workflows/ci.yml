@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '30 * * * *'
+    - cron: '30 20 * * *'
 
 jobs:
   cypress-run:
