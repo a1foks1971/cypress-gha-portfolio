@@ -9,9 +9,9 @@ import { HeaderSteps } from "./headerSteps/headerSteps";
 
 class ProductSteps extends HeaderSteps {
 
-  verifyProductUI(){
+  verifyProductUI({doVisualTesting = false}={}){
     return this.verifyPictures().then(()=>{
-      return this.verifyPriceForm();
+      return this.verifyPriceForm({doVisualTesting: doVisualTesting});
     }).then(()=>{
       return this.verifyBuyForm();
     }).then(()=>{
@@ -32,7 +32,7 @@ class ProductSteps extends HeaderSteps {
     })
   }
 
-  verifyPriceForm(){
+  verifyPriceForm({doVisualTesting = false}={}){
     return ProductPage.Price.getH1value().then((h1Value)=>{
       return this.verifyH1(h1Value);
     }).then(()=>{
@@ -43,6 +43,8 @@ class ProductSteps extends HeaderSteps {
         console.log(`_getDisplayedPrice`, _getDisplayedPrice);
         return expect(_getDisplayedPrice).to.be.equal(_getHiddenPrice);
       });
+    }).then(()=>{
+      if (doVisualTesting) return ProductPage.Price.doVisualTesting();
     });
   }
 

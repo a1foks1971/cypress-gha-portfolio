@@ -1,6 +1,9 @@
 "use strict";
 
 import * as CONSTS from "../../util/consts";
+import {
+  SHOULD_BE as BE,
+} from "../../util/consts";
 import {cy_wait, getAttribute, getText, promiseChaining} from "../../util/functions";
 
 const _css = {
@@ -65,6 +68,18 @@ export class Price {
           $elm: $priceParts,
           msg: `--- [price.js] getDisplayedPrice()`,
         });
+      });
+    });
+  }
+
+  doVisualTesting(){
+    this.getContainerElm().then(($container)=>{
+      cy.wrap($container).find(_css.h1_content).should(BE.VISIBLE);
+      cy.eyesCheckWindow({
+        tag: 'PricePage',
+        target: 'region',
+        element: $container,
+        matchLevel: 'Layout',
       });
     });
   }

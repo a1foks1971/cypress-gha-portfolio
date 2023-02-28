@@ -32,6 +32,13 @@ describe('Verify a product', () => {
       password: this.fixUsers.pwd,
       userName: this.fixUsers.username,
     });
+    cy.eyesOpen({
+      testName: Cypress.currentTest.title,
+    });
+  })
+
+  afterEach(function(){
+    cy.eyesClose();
   })
 
   it(`checks the "Shoes" menu is appeared after hovering`, () => {
@@ -42,7 +49,7 @@ describe('Verify a product', () => {
     }).then(()=>{
       return cy_wait();
     }).then(()=>{
-      return ProductSteps.verifyProductUI();
+      return ProductSteps.verifyProductUI({doVisualTesting: true});
     })
   })
 
