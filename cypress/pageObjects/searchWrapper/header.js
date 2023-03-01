@@ -8,7 +8,8 @@ const cContainer = '.searchWrapper';
 const _css = {
     container: cContainer,
     h1: `h1`,
-}
+    headerControls: `main#main>div>div>div:first-of-type`,
+  }
 
 const _xpath = {
   headerControls: `//h1/following::div[1]`,
@@ -39,10 +40,11 @@ export class Header {
   }
 
   getHeaderControlsFrame() {
-    return cy.xpath(_xpath.headerControls).then(($headerControls)=>{
-      cy.log($headerControls);
-      return Promise.resolve($headerControls);
-    });
+    return cy.get(_css.headerControls, {timeout: this.timeout});
+    // return cy.xpath(_xpath.headerControls).then(($headerControls)=>{
+    //   cy.log($headerControls);
+    //   return Promise.resolve($headerControls);
+    // });
   }
 
   verifyH1({

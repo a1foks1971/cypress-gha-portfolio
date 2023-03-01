@@ -35,18 +35,14 @@ class SearchSteps extends BaseStep {
 
   doVisualTesting_verifySearchHeader({stepName = 'searchSteps'}={}){
     SearchPage.Header.getH1Elm().should(BE.VISIBLE);
-    // SearchPage.Header.getHeaderControlsFrame().then(($elm)=>{
-      // cy_eyesCheckWindow({
-    //     tag: stepName,
-    //     target: 'region',
-    //     // selector: {
-    //     //   type: 'css',
-    //     //   selector: `main#main>div>div>div:first-of-type`,
-    //     // }
-    //           // element: $elm,
-    //     // matchLevel: 'Layout',
-    //   });
-    // });
+    SearchPage.Header.getHeaderControlsFrame().then(($elm)=>{
+      expect($elm).is.visible;
+      cy_eyesCheckWindow({
+        tag: stepName,
+        target: 'region',
+        element: $elm,
+      });
+    });
   }
 
 }
