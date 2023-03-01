@@ -1,0 +1,18 @@
+{
+  "brands": [
+    {
+      "brandName": {
+        "title": "ALDO",
+        "expectedHeader": "ALDO",
+        "expectedBrandOption": "ALDO"
+      }
+    },
+    {
+      "brandName": {
+        "title": "adidas",
+        "expectedHeader": "adidas",
+        "expectedBrandOption": "adidas"
+      }
+    }
+  ]
+}

@@ -41,6 +41,7 @@ export const SHOULD_BE = {
   MATCH: 'match',
   EQUAL: 'eq',
   EXIST: 'exist',
+  INCLUDE_TEXT: 'include.text',
   NOT: {
     EXIST: 'not.exist'
   },
@@ -61,4 +62,8 @@ export const REQUEST = {
     POST: `POST`,
     HEAD: `HEAD`,
   },
+}
+
+export const KEYBORD = {
+  ENTER: '{enter}',
 }

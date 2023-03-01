@@ -2,6 +2,7 @@
 
 import { Page } from "../Page";
 import * as CONSTS from "../../util/consts";
+import {KEYBORD} from "../../util/consts";
 import {console_log} from "../../util/functions";
 
 const cContainer = '.searchWrapper';
@@ -9,6 +10,7 @@ const _css = {
     container: cContainer,
     h1: `h1`,
     headerControls: `main#main>div>div>div:first-of-type`,
+    searchInput: `input#searchAll`,
   }
 
 const _xpath = {
@@ -37,6 +39,11 @@ export class Header {
 
   getH1Elm() {
     return cy.get(_css.h1, {timeout: this.timeout});
+  }
+
+  doSearching({query}={}) {
+    return cy.get(_css.searchInput, {timeout: this.timeout})
+    .type(`${query}${KEYBORD.ENTER}`);
   }
 
   getHeaderControlsFrame() {

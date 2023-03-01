@@ -45,6 +45,12 @@ class SearchSteps extends BaseStep {
     });
   }
 
+  verifySearching({
+    searchQuery = 'adidas',
+  }={}){
+    SearchPage.Header.doSearching({query: searchQuery});
+  }
+
 }
 
 export default new SearchSteps();
