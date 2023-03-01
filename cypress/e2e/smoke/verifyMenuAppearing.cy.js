@@ -1,6 +1,7 @@
 "use strict";
 
 import MenuSteps from "../../steps/menuSteps";
+import { cy_eyesClose, cy_eyesOpen } from "../../util/eyesWrapper";
 import {
   getArgs_for_checkAllLinksOfMenuByName
 } from "../../util/featureFn/getFeature_Menu";
@@ -34,13 +35,13 @@ describe('Verify appearing of product menu under hovering', () => {
 
   beforeEach(()=>{
     cy.visit('https://www.6pm.com/');
-    cy.eyesOpen({
+    cy_eyesOpen({
       testName: 'Verify appearing of product menu under hovering',
     });
   })
 
   afterEach(function(){
-    cy.eyesClose();
+    cy_eyesClose();
   })
 
   it(`checks the "Shoes" menu is aapeared after hovering`, () => {

@@ -7,6 +7,7 @@ import {
   HTML as HTML,
   REG
 } from "../../util/consts";
+import { cy_eyesCheckWindow } from '../../util/eyesWrapper';
 import {console_log, getAttribute, promiseChaining, getLinkResponse} from "../../util/functions";
 import { Page } from "../Page";
 import { LinkMenu } from "./linkMenu";
@@ -44,7 +45,7 @@ export class Footer extends Page {
 
   doVisualTesting(){
     cy.get(_css.container, {timeout: this.timeout}).should(BE.VISIBLE);
-    cy.eyesCheckWindow({
+    cy_eyesCheckWindow({
       tag: 'FooterPage',
       target: 'region',
       selector: {

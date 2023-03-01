@@ -8,6 +8,7 @@ import {
   getArgs_for_verifyMenu,
 } from "../../util/featureFn/getFeature_Product";
 import { cy_wait } from "../../util/functions";
+import { cy_eyesClose, cy_eyesOpen } from "../../util/eyesWrapper";
 
 describe('Verify a product', () => {
   let products = [];
@@ -32,13 +33,13 @@ describe('Verify a product', () => {
       password: this.fixUsers.pwd,
       userName: this.fixUsers.username,
     });
-    cy.eyesOpen({
+    cy_eyesOpen({
       testName: Cypress.currentTest.title,
     });
   })
 
   afterEach(function(){
-    cy.eyesClose();
+    cy_eyesClose();
   })
 
   it(`checks the "Shoes" menu is appeared after hovering`, () => {

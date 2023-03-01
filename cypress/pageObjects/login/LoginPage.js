@@ -7,6 +7,7 @@ import {
     HTML as HTML,
     REG
   } from "../../util/consts";
+import { cy_eyesCheckWindow } from "../../util/eyesWrapper";
   
 const _css = {
     container: `[name="signIn"]`,
@@ -42,7 +43,7 @@ export class LoginPage extends Page {
 
     doVisualTesting(){
         cy.get(_css.email).should(BE.VISIBLE);
-        cy.eyesCheckWindow('LoginPage');
+        cy_eyesCheckWindow('LoginPage');
     }
 }
 

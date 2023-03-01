@@ -10,6 +10,7 @@ import {
 import {console_log, getAttribute, isVisibleCSS} from "../../util/functions";
 import { Actions } from "./actions";
 import { Top } from "./top";
+import { cy_eyesCheckWindow } from "../../util/eyesWrapper";
 
 const _css = {
   picture: `picture`,
@@ -43,6 +44,11 @@ export class Header {
     return cy.get(ParentContainerCSS);
   }
 
+  // getContainerElm_Fn() {
+  //   const ParentContainerCSS = this.parentContainerCSS;
+  //   return function() {return cy.get(ParentContainerCSS)};
+  // }
+
   isMainHeaderVisible({
     index = 0,
   }={}){
@@ -61,7 +67,7 @@ export class Header {
 
   doVisualTesting({stepName = ''}){
     cy.get(this.parentContainerCSS, {timeout: this.timeout}).should(BE.VISIBLE);
-    cy.eyesCheckWindow({
+    cy_eyesCheckWindow({
       tag: `${this.constructor.name} ${stepName}`,
       target: 'region',
       selector: {
@@ -71,5 +77,19 @@ export class Header {
     });
   }
 
+  getHeaderMenuButtonWithName({menuName='Shoes'}={}) {
+    return this.getContainerElm().contains(menuName, {timeout: this.timeout});
+  }
+
+  clickOnHeaderMenuButtonWithName({
+    menuName='Shoes',
+    doVisualTesting = false
+  }={}) {
+    return this.getHeaderMenuButtonWithName({menuName: menuName})
+    .realClick().then(()=>{
+      if (!doVisualTesting) return Promise.resolve();
+      cy.get()
+    });
+  }
 
 }

@@ -4,6 +4,7 @@ import * as CONSTS from "../../util/consts";
 import {
   SHOULD_BE as BE,
 } from "../../util/consts";
+import { cy_eyesCheckWindow } from "../../util/eyesWrapper";
 import {cy_wait, getAttribute, getText, promiseChaining} from "../../util/functions";
 
 const _css = {
@@ -75,7 +76,7 @@ export class Price {
   doVisualTesting(){
     this.getContainerElm().then(($container)=>{
       cy.wrap($container).find(_css.h1_content).should(BE.VISIBLE);
-      cy.eyesCheckWindow({
+      cy_eyesCheckWindow({
         tag: 'PricePage',
         target: 'region',
         element: $container,

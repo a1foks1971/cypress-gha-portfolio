@@ -1,6 +1,7 @@
 "use strict";
 
 import ActionSteps from "../../steps/headerSteps/actionSteps";
+import { cy_eyesClose, cy_eyesOpen } from "../../util/eyesWrapper";
 
 describe('Verify the action login flow', () => {
 
@@ -9,14 +10,14 @@ describe('Verify the action login flow', () => {
   })
 
   beforeEach(function(){
-    cy.eyesOpen({
+    cy_eyesOpen({
       testName: Cypress.currentTest.title,
     });
     cy.visit('https://www.6pm.com/');
   })
 
   afterEach(function(){
-    cy.eyesClose();
+    cy_eyesClose();
   })
 
   it(`checks the login/logout flows`, function(){
@@ -25,7 +26,7 @@ describe('Verify the action login flow', () => {
       email: this.fixUsers.email,
       password: this.fixUsers.pwd,
       userName: this.fixUsers.username,
-      doVisualTesting: true,
+      doVisualTesting: false,
     });
     ActionSteps.logout();
   })

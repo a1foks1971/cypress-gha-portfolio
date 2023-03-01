@@ -7,7 +7,11 @@ import {console_log} from "../../util/functions";
 const cContainer = '.searchWrapper';
 const _css = {
     container: cContainer,
-    h1: `${cContainer} h1`,
+    h1: `h1`,
+}
+
+const _xpath = {
+  headerControls: `//h1/following::div[1]`,
 }
 
 export class Header {
@@ -17,6 +21,7 @@ export class Header {
     } = {}
   ) {
     this.timeout = timeout;
+    this._xpath = _xpath;
   }
 
   getH1Text() {
@@ -31,6 +36,13 @@ export class Header {
 
   getH1Elm() {
     return cy.get(_css.h1, {timeout: this.timeout});
+  }
+
+  getHeaderControlsFrame() {
+    return cy.xpath(_xpath.headerControls).then(($headerControls)=>{
+      cy.log($headerControls);
+      return Promise.resolve($headerControls);
+    });
   }
 
   verifyH1({

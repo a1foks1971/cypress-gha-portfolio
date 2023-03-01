@@ -5,7 +5,7 @@ import * as CONSTS from "../../util/consts";
 import {
   SHOULD_HAVE as HAVE,
 } from "../../util/consts";
-import {console_log, doVisualTestingOfCssRegion} from "../../util/functions";
+import { cy_eyesCheckWindow, doVisualTestingOfCssRegion } from "../../util/eyesWrapper";
 
 const cContainer = 'body>div>div>header>div:nth-of-type(2)';
 const _css = {
@@ -119,7 +119,7 @@ export class Menu extends Page {
           cy.log('doVisualTesting', doVisualTesting, 'expectVisible', expectVisible);
           if (!doVisualTesting) return Promise.resolve();
           if (!expectVisible) return Promise.resolve();
-          return cy.eyesCheckWindow({
+          return cy_eyesCheckWindow({
             tag: stepName,
             target: 'region',
             element: $menuFrame,
@@ -127,7 +127,7 @@ export class Menu extends Page {
           // return this.getCssOfMenuByName({
           //   menuName: menuName,
           // }).then((_menuCSS)=>{
-          //   return doVisualTestingOfCssRegion({
+            // return doVisualTestingOfCssRegion({
           //     tag: `${stepName}`,
           //     css_selector: _menuCSS+">div>div",
           //     check_visibility_css: _menuCSS,
