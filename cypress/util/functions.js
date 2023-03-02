@@ -1,7 +1,7 @@
 "use strict";
 
+import _ from 'lodash';
 import * as CONSTS from "./consts";
-import { cy_eyesCheckWindow } from "./eyesWrapper";
 
 export function console_log(dbg){
   let _arr = [];
@@ -49,6 +49,23 @@ export function getText({
 }={}) {
   return cy.wrap($elm).invoke(CONSTS.HTML.PROP.TEXT).then((answer)=>{
     console.log(`getText() : `, answer, msg);
+    return Promise.resolve(answer);
+  });
+}
+
+export function getAllElementsText({
+  $elmentS,
+  msg = '',
+}={}) {
+  let answer = [];
+  return promiseChaining(_.times($elmentS.length), index => {
+    const $el = $elmentS[index];
+    return getText({$elm: $el}).then((_text)=>{
+      answer.push(_text);
+      return Promise.resolve()
+    })
+  }).then(()=>{
+    console.log(`getAllElementsText() : `, answer, msg);
     return Promise.resolve(answer);
   });
 }

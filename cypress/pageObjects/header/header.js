@@ -44,10 +44,9 @@ export class Header {
     return cy.get(ParentContainerCSS);
   }
 
-  // getContainerElm_Fn() {
-  //   const ParentContainerCSS = this.parentContainerCSS;
-  //   return function() {return cy.get(ParentContainerCSS)};
-  // }
+  mouseHoverOverLogoImage() {
+    return this.getContainerElm().find(_css.picture).realHover();
+  }
 
   isMainHeaderVisible({
     index = 0,

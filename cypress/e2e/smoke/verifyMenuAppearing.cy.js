@@ -48,19 +48,19 @@ describe('Verify appearing of product menu under hovering', () => {
     MenuSteps.doVisualTesting({stepName: 'Verify the header visibility'});
     // menu_Shoes.doVisualTesting = true;
     menu_Shoes.stepName = Cypress.currentTest.title;
-    MenuSteps.checkAllLinksOfMenuByName(menu_Shoes);
+    MenuSteps.verifyMouseHoveringOverMenuWithName(menu_Shoes);
   })
 
   it(`checks the "Clothing" menu is aapeared after hovering`, () => {
     // menu_Clothing.doVisualTesting = true;
     menu_Shoes.stepName = Cypress.currentTest.title;
-    MenuSteps.checkAllLinksOfMenuByName(menu_Clothing);
+    MenuSteps.verifyMouseHoveringOverMenuWithName(menu_Clothing);
   })
 
   it(`checks the "Bags" menu is aapeared after hovering`, () => {
     // menu_Bags.doVisualTesting = true;
     menu_Shoes.stepName = Cypress.currentTest.title;
-    MenuSteps.checkAllLinksOfMenuByName(menu_Bags);
+    MenuSteps.verifyMouseHoveringOverMenuWithName(menu_Bags);
   })
 
 })

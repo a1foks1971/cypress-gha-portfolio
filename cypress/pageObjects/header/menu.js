@@ -6,6 +6,7 @@ import {
   SHOULD_HAVE as HAVE,
 } from "../../util/consts";
 import { cy_eyesCheckWindow, doVisualTestingOfCssRegion } from "../../util/eyesWrapper";
+import { getAllElementsText, getText } from "../../util/functions";
 
 const cContainer = 'body>div>div>header>div:nth-of-type(2)';
 const _css = {
@@ -14,7 +15,7 @@ const _css = {
     menuLinks: `${cContainer}>ul>li>a`,
     menuContainer: `${cContainer}>ul>li>div`,
     frameColumns: `div>div>div`,
-    columnName: `a[class*="-z"]`,
+    columnName: `[class*="-z"]`,
     // columnName: `a.xf-z`,
     columnItems: `ul>li>a`  
 }
@@ -24,7 +25,7 @@ export class Menu extends Page {
       super();
   }
 
-  checkAllLinksOfMenuByName({
+  verifyMouseHoveringOverMenuWithName({
       menuName,
       stepName,
       dbg = CONSTS.DEBUG_MODE,
@@ -246,6 +247,41 @@ export class Menu extends Page {
           cy.wrap($item).should(`${ expectVisible ? "" : "not."}be.visible`);
           cy.wrap($item).click();
         });
+    });
+  }
+
+  getAllOptionsOfColumnByNameOfMenuByName({
+    menuName,
+    columnName,
+    dbg = CONSTS.DEBUG_MODE,
+    timeout = this.timeout,
+  } = {}){
+    console.log(" -- getAllOptionsOfColumnByNameOfMenuByName()");
+    return this.getMenuFrameElmOfMenuByName({
+      menuName: menuName,
+      dbg: dbg,
+      timeout: timeout
+    }).then(($menuFrame)=>{
+      return this.getColumnIndexByColumnName({
+        $menuFrame: $menuFrame,
+        columnName: columnName,
+        dbg: dbg,
+        timeout: timeout,
+      }).then((columnIndex)=>{
+        console.log("columnIndex", columnIndex);
+        if (columnIndex === null) return console.log(`WARNING: Column "${columnName} is not found"`);
+        const _selector = `${_css.frameColumns}:nth-of-type(${columnIndex + 1})>a`
+        console.log("_selector", _selector);
+        console.log("$menuFrame", $menuFrame);
+        return cy.wrap($menuFrame)
+          .find(_selector)
+          .parent()
+          .find('ul>li>a')
+          .then(($optionsContainer)=>{
+            console.log("$optionsContainer", $optionsContainer);
+            return getAllElementsText({$elmentS: $optionsContainer});
+          });
+      });
     });
   }
 

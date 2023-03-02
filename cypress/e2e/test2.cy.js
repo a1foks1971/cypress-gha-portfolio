@@ -9,35 +9,15 @@ describe('Verify appearing of product menu under hovering', () => {
   })
 
   it('checks the "Shoes" menu is aapeared after hovering', () => {
-    MenuPage.checkAllLinksOfMenuByName({menuName: "Shoes"});
+    MenuPage.verifyMouseHoveringOverMenuWithName({menuName: "Shoes"});
   })
 
   it('checks the "Clothing" menu is aapeared after hovering', () => {
-    MenuPage.checkAllLinksOfMenuByName({menuName: "Clothing"});
+    MenuPage.verifyMouseHoveringOverMenuWithName({menuName: "Clothing"});
   })
 
   it('checks the "Bags" menu is aapeared after hovering', () => {
-    MenuPage.checkAllLinksOfMenuByName({menuName: "Bags"});
+    MenuPage.verifyMouseHoveringOverMenuWithName({menuName: "Bags"});
   })
-
-  // it('checks the "Accessories" menu is aapeared after hovering', () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Accessories"});
-  // })
-
-  // it(`checks the "Women's" menu is aapeared after hovering`, () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Women's"});
-  // })
-
-  // it(`checks the "Men's" menu is aapeared after hovering`, () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Men's"});
-  // })
-
-  // it(`checks the "Kids'" menu is aapeared after hovering`, () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Kids'"});
-  // })
-
-  // it('checks the "Brands" menu is aapeared after hovering', () => {
-  //   MenuPage.checkAllLinksOfMenuByName({menuName: "Brands"});
-  // })
 
 })

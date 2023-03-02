@@ -13,13 +13,13 @@ class MenuSteps extends BaseStep {
     this.Header = new Header({_parentContainerCSS: this.HeaderContainerCSS});
   }
 
-  checkAllLinksOfMenuByName({
+  verifyMouseHoveringOverMenuWithName({
     menuName,
     stepName,
     doVisualTesting = false,
   } = {}){
     cy.log('doVisualTesting', doVisualTesting);
-    return MenuPage.checkAllLinksOfMenuByName({
+    return MenuPage.verifyMouseHoveringOverMenuWithName({
       menuName: menuName,
       doVisualTesting: doVisualTesting,
       stepName: stepName,
@@ -34,7 +34,7 @@ class MenuSteps extends BaseStep {
     expItemInHeader,
     doVisualTesting = false,
   } = {}){
-    return MenuPage.checkAllLinksOfMenuByName({
+    return MenuPage.verifyMouseHoveringOverMenuWithName({
       menuName: menuName,
       doVisualTesting: doVisualTesting,
     }).then(()=>{
@@ -73,7 +73,19 @@ class MenuSteps extends BaseStep {
     this.Header.doVisualTesting({stepName: stepName});
   }
 
-
+  verifyPopupMenuOption({
+    menuName,
+    columnName,
+    expectedOptionName,
+  }={}){
+    return MenuPage.getAllOptionsOfColumnByNameOfMenuByName({
+      menuName: menuName,
+      columnName: columnName,
+    }).then((allOptions)=>{
+      console.log('allOptions', allOptions);
+      return expect(allOptions).contains(expectedOptionName);
+    });
+  }
 }
 
 export default new MenuSteps();
