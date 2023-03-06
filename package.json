@@ -8,6 +8,7 @@
     "runtest": "cypress run --env run_env=$DB_ENV",
     "cy:run": "cypress run --env run_env=$DB_ENV --spec ",
     "cy:open": "cypress open --env run_env=$DB_ENV",
+    "cy:learning:open": "cypress open --config-file ./cypress/e2e/cy_learning.config.js",
     "cy:runid": "node cypress/config/runid.js"
   },
   "author": "",

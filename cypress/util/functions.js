@@ -116,3 +116,24 @@ export function isTrulyVisible({$elm}={}) {
   return Promise.resolve(isTrulyVisible);
 }
 
+export function verifyLoadTimeOfPageWithURL({
+  url = 'https://www.6pm.com/',
+  maxTimeSec = 10*1000,
+}={}) {
+  /*
+  https://github.com/cypress-io/cypress-example-recipes/blob/master/examples/testing-dom__performance-metrics/cypress/e2e/spec.cy.js
+  */
+  cy.visit(url, {
+    onBeforeLoad: (win) => {
+      win.performance.mark('start-loading')
+    },
+    onLoad: (win) => {
+      win.performance.mark('end-loading')
+    },
+  }).its('performance').then((p) => {
+    p.measure('pageLoad', 'start-loading', 'end-loading')
+    const measure = p.getEntriesByName('pageLoad')[0]
+
+    assert.isAtMost(measure.duration, maxTimeSec)
+  })
+}

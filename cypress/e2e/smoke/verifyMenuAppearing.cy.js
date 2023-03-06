@@ -34,7 +34,7 @@ describe('Verify appearing of product menu under hovering', () => {
 
 
   beforeEach(()=>{
-    cy.visit('https://www.6pm.com/');
+    MenuSteps.verifyPageLoadTime();
     cy_eyesOpen({
       testName: 'Verify appearing of product menu under hovering',
     });
@@ -45,6 +45,11 @@ describe('Verify appearing of product menu under hovering', () => {
   })
 
   it(`checks the "Shoes" menu is aapeared after hovering`, () => {
+    // cy.document().then((htmlDoc)=>{
+    //   console.log("htmlDoc=cy.document()", htmlDoc); // HTML htmlDoc.querySelector(...)
+    //   const jqueryObj = Cypress.$(htmlDoc);
+    //   console.log("jqueryObj = Cypress.$(htmlDoc)", jqueryObj); // jqueryObj.Width
+    // })
     MenuSteps.doVisualTesting({stepName: 'Verify the header visibility'});
     // menu_Shoes.doVisualTesting = true;
     menu_Shoes.stepName = Cypress.currentTest.title;
