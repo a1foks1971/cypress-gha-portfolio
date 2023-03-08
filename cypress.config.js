@@ -23,6 +23,13 @@ module.exports = defineConfig({
         console.log('override after:run');
         await afterRunHook();
       });
+
+      on('task', {
+        log(message) {
+          console.log(message)
+          return null
+        },
+      });
     },
   },
 });
