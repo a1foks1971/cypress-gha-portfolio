@@ -31,6 +31,14 @@ module.exports = defineConfig({
         },
       });
     },
+    env: {
+      /* 
+      https://www.youtube.com/watch?v=CVBSe2hFXVQ
+      Cypress Plugin API: "Imagine Postman, but in Cypress"
+      */
+      // snapshotOnly: true,
+      requestMode: true
+    }
   },
 });
 

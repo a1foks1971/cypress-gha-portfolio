@@ -26,3 +26,4 @@ import "cypress-real-events";
 import 'cypress-axe';
 
 require('@cypress/xpath');
+import 'cypress-plugin-api'
