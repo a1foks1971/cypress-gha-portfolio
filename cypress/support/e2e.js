@@ -27,3 +27,4 @@ import 'cypress-axe';
 
 require('@cypress/xpath');
 import 'cypress-plugin-api'
+chai.use(require('chai-json-schema'));

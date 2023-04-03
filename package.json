@@ -23,6 +23,7 @@
     "neat-csv": "5.1.0"
   },
   "dependencies": {
+    "chai-json-schema": "^1.5.1",
     "cypress-plugin-api": "^2.11.0",
     "cypress-real-events": "^1.7.6"
   }
