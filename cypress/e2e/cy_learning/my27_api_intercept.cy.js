@@ -144,6 +144,23 @@ describe("My Intercept Network Request", () => {
     cy.get('#run-button').click();
     cy.wait("@todos").should((obj) => {
       console.log(`STUBBING obj`, obj);
+      console.log(`STUBBING obj.keys`, Object.keys(obj));
+      expect(obj).to.be.an('object');
+      /* Variant A */
+      expect(Object.keys(obj)).contains('response');
+      expect(Object.keys(obj.response)).contains("headers");
+      expect(Object.keys(obj.response.headers)).contains("content-type");
+      /* Variant B */
+      /*
+        .to.have.keys() === .to.have.all.keys()
+        Without ".any" all keys MUST be listed
+      */
+      expect(obj).to.have.keys('id', 'browserRequestId', 'routeId', 'request', 'state', 'requestWaited', 'responseWaited', 'subscriptions', 'setLogFlag', 'response');
+      expect(obj).to.have.all.keys('id', 'browserRequestId', 'routeId', 'request', 'state', 'requestWaited', 'responseWaited', 'subscriptions', 'setLogFlag', 'response');
+      expect(obj).to.have.any.keys('response');
+      expect(obj.response).to.have.any.keys("headers");
+      expect(obj.response.headers).to.have.any.keys("content-type");
+      /**/
       expect(obj.response.body.id).to.be.equal(stub_response_body.id);
       expect(obj.response.body).to.be.jsonSchema(jsonSchema);
     });
